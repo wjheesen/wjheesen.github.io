@@ -1,0 +1,469 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<h1>Drawing shapes based on user input</h1>
+
+<p>
+    I recently published an app called <a href="https://play.google.com/store/apps/details?id=com.educational_math_apps.walldraw">Wall Draw</a>
+    that allows users to draw shapes by dragging a finger across the screen. The app features two distinct drawing methods:
+    one that scales a shape to fit inside a rectangular region, and another that stretches a shape across a line.
+    We'll cover both of these methods in detail, but first take a moment to test them out on the canvas below.
+</p>
+
+<form class="form-inline">
+    <div class="form-group">
+        <label for="selectDrawMode" class="control-label">
+            Draw mode:
+        </label>
+        <select class="form-control" id="selectDrawMode">
+            <option value="0">Fit in rectangle</option>
+            <option value="1">Strech across line</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="selectShape" class="control-label">
+            Shape:
+        </label>
+        <select class="form-control" id="selectShape">
+            <option value="0">Pentagon</option>
+            <option value="1">Hexagon</option>
+            <option value="2">Diamond</option>
+            <option value="3">Star</option>
+            <option value="4">Bat</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="pickFillColor" class="control-label">
+            Fill color:
+        </label>
+        <input class="form-control" id="pickFillColor" type="color" value="#ffff00" />
+    </div>
+    <div class="form-group">
+        <label for="pickStrokeColor" class="control-label">
+            Stroke color:
+        </label>
+        <input class="form-control" id="pickStrokeColor" type="color" value="#000000" />
+    </div>
+</form>
+
+<canvas id="canvas" width="640" height="300">
+    Your browser doesn't appear to support the canvas element.
+</canvas>
+
+<p>Be sure to note some of the key differences between the two drawing methods, as summarized in the table below.</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                Property
+            </th>
+            <th>
+                Fit in rectangle
+            </th>
+            <th>
+                Stretch across line
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                Aspect ratio
+            </th>
+            <td>
+                Varies with rectangle
+            </td>
+            <td>
+                Fixed
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Orientation
+            </th>
+            <td>
+                Varies with rectangle
+            </td>
+            <td>
+                Fixed
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Rotation angle
+            </th>
+            <td>
+                Fixed
+            </td>
+            <td>
+                Varies from 0° to 360°
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Size
+            </th>
+            <td>
+                Matches size of rectangle
+            </td>
+            <td>
+                Depends on length of line
+        </tr>
+    </tbody>
+</table>
+
+<p>You will need... </p>
+<dl class="dl-horizontal">
+    <dt>
+        A drawing project
+    </dt>
+    <dd>
+        Consists of code specific to platform and rendering library.
+    </dd>
+    <dt>
+        A math package
+    </dt>
+    <dd>
+        Consists of point, vector, rect, and matrix objects.
+    </dd>
+    <dt>
+        A data package
+    </dt>
+    <dd>
+        Consists of path, mesh, and shape objects.
+    </dd>
+    <dt>
+        A drag detector
+    </dt>
+    <dd>
+        Detects drag events and sends callbacks to interface.
+    </dd>
+</dl>
+@* for onDragDown, onDragMove, onDragOut, and onDragStart *@
+
+<h2>1.0 Start a drawing project</h2>
+
+<p>
+    Begin by choosing a platform and rendering library. For example, <a href="https://play.google.com/store/apps/details?id=com.educational_math_apps.walldraw">Wall Draw</a>
+    is built on the Android platform, and uses the OpenGL ES 2.0 rendering library. The canvas at the top of this page is
+    designed for the Web, and uses HTML5 canvas for rendering. Refer to the table below for some common options and tutorials.
+</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                Platform
+            </th>
+            <th>
+                Rendering library
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            string[] platforms =
+            {
+                "Android",
+                "Android",
+                "iOS",
+                "Web",
+                "Web",
+                "Xamarin",
+                "Xamarin"
+            };
+
+            string[] renderingLibraries =
+            {
+                "Canvas",
+                "OpenGL ES",
+                "OpenGL ES",
+                "HTML5 canvas",
+                "WebGL",
+                "CocosSharp",
+                "SkiaSharp"
+            };
+
+            string[] tutorialLinks =
+            {
+                "https://developer.android.com/training/custom-views/custom-drawing.html",
+                "https://developer.android.com/guide/topics/graphics/opengl.html",
+                "https://developer.apple.com/library/content/documentation/3DDrawing/Conceptual/OpenGLES_ProgrammingGuide/Introduction/Introduction.html",
+                "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API",
+                "https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API",
+                "https://developer.xamarin.com/guides/cross-platform/game_development/cocossharp/",
+                "https://developer.xamarin.com/guides/cross-platform/drawing/introduction/"
+            };
+
+            for (int i = 0; i < platforms.Length; i++)
+            {
+                <tr>
+                    <td>
+                        @platforms[i]
+                    </td>
+                    <td>
+                        <a href="@tutorialLinks[i]">
+                            @renderingLibraries[i]
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div class="bs-callout bs-callout-info">
+    <h4>Xamarin supports cross-platform rendering libraries</h4>
+    Code that you write with CocosSharp or SkiaSharp can be shared between Android and iOS applications.
+    See <a href="https://www.xamarin.com/">xamarin.com</a> for more information.
+</div>
+
+<h2>2.0 Create a math package</h2>
+
+<p>
+    The following subsections describe the basic structure for point, vector, rectangle, and matrix objects (using Java syntax).
+    In most cases you can reuse or extend code from your platform or rendering library instead of writing the code yourself;
+    however, if you need to write a portion of the code on your own, you can refer to the sample code I provide for each method.
+</p>
+
+<div class="bs-callout bs-callout-info">
+    <h4>For simple math structures, prefer value types (structs) over reference types (classes).</h4>
+    Structs are cheap to work with because they operate entirely on the stack, requiring no memory overhead. 
+    Moreover, like primitives, structs are passed by value and cannot be null, so you can safely modify them inside a method without
+    changing the values of the original struct or risking a null pointer exception. For more information, see Microsoft's guide on 
+    <a href="https://msdn.microsoft.com/en-us/library/ms229017(v=vs.110).aspx">choosing between a class and a struct</a>.
+</div>
+
+<h3>2.1 Create a point class</h3>
+
+<div class="bs-callout bs-callout-warning">
+    <h4>Do not confuse points with vectors</h4>
+    A point's (<var>x</var>,<var>y</var>) coordinates represent a position on the coordinate plane, whereas a vector's
+    (<var>x</var>,<var>y</var>) coordinates represent a direction and a magnitude. A vector can be scaled and normalized,
+    and can be added, subtracted, dotted, and crossed with another vector, but none of these operations apply coherently to points.
+    Furthermore, the method for transforming a point differs from the method for transforming a vector.
+    Therefore I recommend using two distinct classes to define point and vector objects.
+</div>
+
+<p>
+    Your <code class="language-java">Point</code> class/struct should be structured as follows:
+</p>
+
+@MathDocs.PointDoc()
+
+<h3>2.2 Create a vector class</h3>
+
+<p>
+    Your <code class="language-java">Vec2</code> class/struct should be structured as follows:
+</p>
+
+@MathDocs.Vec2Doc()
+
+<h3>2.3 Create a rectangle class</h3>
+
+<p>
+    Your <code class="language-java">Rect</code> class/struct should be structured as follows:
+</p>
+
+@MathDocs.RectDoc()
+
+<h3>2.4 Create a matrix class</h3>
+
+<p>
+    Your <code class="language-java">Matrix3</code> class/struct should be structured as follows:
+</p>
+
+@MathDocs.Matrix3Doc()
+
+<h2>3.0 Create a data package</h2>
+
+<h3>3.1 Create a path class</h3>
+
+<h3>3.2 Create a mesh class</h3>
+
+<h3>3.3 Create a shape class</h3>
+
+<h2>4.0 Method one: Scale shape to fit inside rectangle</h2>
+
+<p>
+    The first method requires a rect to rect matrix transformation that maps a shape into a rectangular region.
+</p>
+
+The rectanglar region is defined by
+
+<h2>
+    Method two: Stretch shape along line.
+</h2>
+
+
+<h2>5.0 Method two: Scale shape to fit inside rectangle</h2>
+
+The second method requires a stretch rotate matrix transformation
+
+<h2>
+    Conclusion
+</h2>
+
+
+
+<p class="legal">
+    Portions of this page are modifications based on work created and <a href="https://github.com/opentk/opentk">
+        shared by the Open Toolkit Library
+    </a> and used according to terms described in the <a href="https://github.com/opentk/opentk/blob/develop/License.txt">
+        The Open Toolkit library license
+    </a>.
+</p>
+
+<p class="legal">
+    Portions of this page are modifications based on work created and <a href="http://code.google.com/policies.html">
+        shared by the Android Open
+        Source Project
+    </a> and used according to terms described in the <a href="http://creativecommons.org/licenses/by/2.5/">
+        Creative Commons
+        2.5 Attribution License
+    </a>.
+<p>
+
+    @section Scripts {
+
+        <script src="~/js/prism.js"></script>
+        <script src="~/js/canvas-util.js"></script>
+
+        <script>
+        $(document).ready(function () {
+
+            //Draw Mode Enum
+            const DrawMode = {
+                FillRect: 0,
+                StretchRotate: 1,
+            };
+
+            //Meshes array
+            const Meshes = [
+               Mesh.nGon(5), //Hexagon
+               Mesh.nGon(6), //Pentagon
+               Mesh.nStar(2, .5, 1), //Diamond
+               Mesh.nStar(5, 0.4, 1), //Star
+               Mesh.bat() //Bat
+            ];
+
+            //Draw variables set by user
+            let drawMode = $("#selectDrawMode").val();
+            let mesh = Meshes[$("#selectShape").val()];
+            let fillColor = $("#pickFillColor").val();
+            let strokeColor = $("#pickStrokeColor").val();
+            let lineWidth = 6;
+
+            //Listen for change in draw variables
+            $("#selectDrawMode").change(function () {
+                //Val refers to order of option in list and corresponds to enum DrawMode
+                drawMode = $(this).find("option:selected").val();
+            });
+            $("#selectShape").change(function () {
+                //Val refers to order of option in index of Meshes array
+                mesh = Meshes[$(this).val()];
+            })
+            $("#pickFillColor").change(function () {
+                fillColor = $(this).val();
+            })
+            $("#pickStrokeColor").change(function () {
+                strokeColor = $(this).val();
+            })
+
+            //Canvas variables
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+            //Mouse drag listener
+            const surface = new Surface(canvas, onMouseDown, onMouseMove, onMouseUp, onMouseOut, true);
+
+            //Set initial text on canvas
+            ctx.font = "16px sans-serif";
+            ctx.fillText("Click and drag to draw shape.", 10, 50);
+
+            //Shapes to render
+            let shape = new Rect(0, 0, 0, 0);
+
+            let selectionBox = new Rect(0, 0, 0, 0);
+            selectionBox.lineWidth = 4;
+            selectionBox.strokeColor = 'blue';
+            selectionBox.fillColor = 'lightBlue';
+
+            let stretchLine = Path.withCapacity(2);
+            stretchLine.lineWidth = 4;
+            stretchLine.strokeColor = 'red';
+
+            //Mouse tracking variable
+            let start;
+
+            function onMouseDown(mouseX, mouseY) {
+                //Convert to point and save
+                start = new Point(mouseX, mouseY);
+                //Init our shape
+                shape = Shape.fromMesh(mesh, fillColor);
+                shape.points.data.fill(0);
+                shape.lineWidth = lineWidth;
+                shape.strokeColor = strokeColor;
+            }
+
+            function onMouseMove(mouseX, mouseY) {
+                //Convert to point
+                let mouse = new Point(mouseX, mouseY);
+
+                if (drawMode == DrawMode.FillRect) {
+                    //Calculate rect
+                    let dx = mouse.x - start.x;
+                    let dy = mouse.y - start.y;
+                    let rect = Rect.fromDimensions(start.x, start.y, dx, dy);
+                    //Update shape
+                    shape.setBounds(rect, ScaleToFit.Fill);
+                    //Update selection box
+                    selectionBox.set(rect);
+                } else if (drawMode == DrawMode.StretchRotate) {
+                    //Update shape
+                    shape.setEndPoints(start, mouse);
+                    //Update line
+                    stretchLine.setPoint(start, 0);
+                    stretchLine.setPoint(mouse, 1);
+                }
+
+                // clear the canvas and redraw all shapes
+                canvas.draw();
+            }
+
+            function onMouseUp() {
+                if (drawMode == DrawMode.FillRect) {
+                    //Remove selection box
+                    selectionBox.setEmpty();
+                } else if (drawMode == DrawMode.StretchRotate) {
+                    //Remove line
+                    stretchLine.data.fill(0);
+                }
+                canvas.draw();
+            }
+
+            function onMouseOut() {
+                onMouseUp();
+            }
+
+            canvas.draw = function() {
+                // clear the canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // redraw all shapes in their current positions
+                if (drawMode == DrawMode.FillRect) {
+                    selectionBox.draw(ctx);
+                    shape.draw(ctx);
+                } else if (drawMode == DrawMode.StretchRotate) {
+                    shape.draw(ctx);
+                    stretchLine.draw(ctx);
+                }
+            }
+
+        });
+        </script>
+    }
+
+
+
