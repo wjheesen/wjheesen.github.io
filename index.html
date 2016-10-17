@@ -6,3 +6,392 @@ title: Hank Quinlan, Horrible Cop
 	<h1>Hi there, I'm Hank Quinlan!</h1>
 	<p>I'm best known as the horrible cop from <em>A Touch of Evil</em> Don't trust me. <a href="/about">Read more about my life...</a></p>
 </div><!-- /.blurb -->
+
+<h3>2.2 Create a vector class</h3>
+
+<p>
+    Your <code class="language-java">Vec2</code> class/struct should be structured as follows:
+</p>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="1">
+                <a href="#vec2-fields" data-toggle="collapse">Fields</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="vec2-fields" class="collapse">
+        
+<tr>
+    <td>
+        <code class="language-java">public float x</code><br/>The x component of this vector.
+    </td>
+</tr>
+                
+
+<tr>
+    <td>
+        <code class="language-java">public float y</code><br/>The y component of this vector.
+    </td>
+</tr>
+                
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="1">
+                <a href="#vec2-constructors" data-toggle="collapse">Constructors</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="vec2-constructors" class="collapse">
+        
+<tr>
+    <td>
+        <a href="#vec2-constructors-1" data-toggle="collapse">
+            <code class="language-java">public Vec2()</code>
+        </a>
+        <p>Creates a vector initialized to (0,0).</p>
+        <div id="vec2-constructors-1" class="collapse">
+            <pre><code class="language-java">this(0,0);</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-constructors-2" data-toggle="collapse">
+            <code class="language-java">public Vec2(float x, float y)</code>
+        </a>
+        <p>Creates a vector with the specified (x,y) components.</p>
+        <div id="vec2-constructors-2" class="collapse">
+            <pre><code class="language-java">
+this.x = x;
+this.y = y;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-constructors-3" data-toggle="collapse">
+            <code class="language-java">public Vec2(Vec2 src)</code>
+        </a>
+        <p>Creates a vector that is a deep copy of src.</p>
+        <div id="vec2-constructors-3" class="collapse">
+            <pre><code class="language-java">
+this.x = src.x;
+this.y = src.y;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="1">
+                <a href="#vec2-static-factory-methods" data-toggle="collapse">Static factory methods</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="vec2-static-factory-methods" class="collapse">
+        
+<tr>
+    <td>
+        <a href="#vec2-static-factory-methods-1" data-toggle="collapse">
+            <code class="language-java">public Vec2 fromPoints(start, end)</code>
+        </a>
+        <p>Computes the vector from the specified start point to the specified end point.</p>
+        <div id="vec2-static-factory-methods-1" class="collapse">
+            <pre><code class="language-java">return new Vec2(end.x - start.x, end.y - start.y);</code></pre>
+        </div>
+    </td>
+</tr>
+            
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="1">
+                <a href="#vec2-properties" data-toggle="collapse">Properties</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="vec2-properties" class="collapse">
+        
+<tr>
+    <td>
+        <a href="#vec2-properties-1" data-toggle="collapse">
+            <code class="language-java">public boolean isZero()</code>
+        </a>
+        <p>Checks if this vector is equal to the additive identity (0,0).</p>
+        <div id="vec2-properties-1" class="collapse">
+            <pre><code class="language-java">return (this.x == 0) &amp;&amp; (this.y == 0);</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-properties-2" data-toggle="collapse">
+            <code class="language-java">public float length()</code>
+        </a>
+        <p>Computes the length of this vector.</p>
+        <div id="vec2-properties-2" class="collapse">
+            <pre><code class="language-java">return Math.sqrt(this.length2());</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-properties-3" data-toggle="collapse">
+            <code class="language-java">public float length2()</code>
+        </a>
+        <p>Computes the length of this vector, squared.</p>
+        <div id="vec2-properties-3" class="collapse">
+            <pre><code class="language-java">return (this.x * this.x) + (this.y * this.y);</code></pre>
+        </div>
+    </td>
+</tr>
+            
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="1">
+                <a href="#vec2-setters" data-toggle="collapse">Setters</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="vec2-setters" class="collapse">
+        
+<tr>
+    <td>
+        <a href="#vec2-setters-1" data-toggle="collapse">
+            <code class="language-java">public void set(Vec2 src)</code>
+        </a>
+        <p>Sets this vector's (x,y) components to those of src.</p>
+        <div id="vec2-setters-1" class="collapse">
+            <pre><code class="language-java">this.set(src.x,src.y);</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-setters-2" data-toggle="collapse">
+            <code class="language-java">public void set(float x, float y)</code>
+        </a>
+        <p>Sets this vector's (x,y) components.</p>
+        <div id="vec2-setters-2" class="collapse">
+            <pre><code class="language-java">
+this.x = x;
+this.y = y;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="1">
+                <a href="#vec2-transformations" data-toggle="collapse">Transformations</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="vec2-transformations" class="collapse">
+        
+<tr>
+    <td>
+        <a href="#vec2-transformations-1" data-toggle="collapse">
+            <code class="language-java">public void normalize()</code>
+        </a>
+        <p>Normalizes this vector to unit length</p>
+        <div id="vec2-transformations-1" class="collapse">
+            <pre><code class="language-java">this.normalize(1);</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-transformations-2" data-toggle="collapse">
+            <code class="language-java">public void normalize(float length)</code>
+        </a>
+        <p>Normalizes this vector to the specified length</p>
+        <div id="vec2-transformations-2" class="collapse">
+            <pre><code class="language-java">this.scale(length / this.length());</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-transformations-3" data-toggle="collapse">
+            <code class="language-java">public void rotate90Left()</code>
+        </a>
+        <p>Rotates this vector 90 degrees to the left (CCW).</p>
+        <div id="vec2-transformations-3" class="collapse">
+            <pre><code class="language-java">
+float xCopy = this.x;
+this.x = -this.y;
+this.y = xCopy;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-transformations-4" data-toggle="collapse">
+            <code class="language-java">public void rotate90Right()</code>
+        </a>
+        <p>Rotates this vector 90 degrees to the right (CW).</p>
+        <div id="vec2-transformations-4" class="collapse">
+            <pre><code class="language-java">
+float xCopy = this.x;
+this.x = this.y;
+this.y = -xCopy;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="1">
+                <a href="#vec2-operations" data-toggle="collapse">Operations</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="vec2-operations" class="collapse">
+        
+<tr>
+    <td>
+        <a href="#vec2-operations-1" data-toggle="collapse">
+            <code class="language-java">public float cross(Vec2 other)</code>
+        </a>
+        <p>Finds the cross product of this vector with the other vector.</p>
+        <div id="vec2-operations-1" class="collapse">
+            <pre><code class="language-java">return (this.x * other.y) - (this.y * other.x);</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-operations-2" data-toggle="collapse">
+            <code class="language-java">public float dot(Vec2 other)</code>
+        </a>
+        <p>Finds the dot product of this vector with the other vector.</p>
+        <div id="vec2-operations-2" class="collapse">
+            <pre><code class="language-java">return (this.x * other.x) + (this.y * other.y);</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-operations-3" data-toggle="collapse">
+            <code class="language-java">public void add(Vec2 other)</code>
+        </a>
+        <p>Adds the other vector to this vector.</p>
+        <div id="vec2-operations-3" class="collapse">
+            <pre><code class="language-java">
+this.x += other.x;
+this.y += other.y;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-operations-4" data-toggle="collapse">
+            <code class="language-java">public void subtract(Vec2 other)</code>
+        </a>
+        <p>Subtracts the other vector from this vector.</p>
+        <div id="vec2-operations-4" class="collapse">
+            <pre><code class="language-java">
+this.x -= other.x;
+this.y -= other.y;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-operations-5" data-toggle="collapse">
+            <code class="language-java">public void negate()</code>
+        </a>
+        <p>Negates this vector.</p>
+        <div id="vec2-operations-5" class="collapse">
+            <pre><code class="language-java">
+this.x = -this.x;
+this.y = -this.y;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-operations-6" data-toggle="collapse">
+            <code class="language-java">public void scale(float scalar)</code>
+        </a>
+        <p>Scales this vector by the specified scalar.</p>
+        <div id="vec2-operations-6" class="collapse">
+            <pre><code class="language-java">
+this.x *= scalar;
+this.y *= scalar;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+
+<tr>
+    <td>
+        <a href="#vec2-operations-7" data-toggle="collapse">
+            <code class="language-java">public void divide(float scalar)</code>
+        </a>
+        <p>Divides this vector by the specified scalar.</p>
+        <div id="vec2-operations-7" class="collapse">
+            <pre><code class="language-java">
+this.x /= scalar;
+this.y /= scalar;</code></pre>
+        </div>
+    </td>
+</tr>
+            
+    </tbody>
+</table>
+
