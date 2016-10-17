@@ -1,131 +1,130 @@
- <script>
-        $(document).ready(function () {
 
-            //Draw Mode Enum
-            const DrawMode = {
-                FillRect: 0,
-                StretchRotate: 1,
-            };
+ $(document).ready(function () {
 
-            //Meshes array
-            const Meshes = [
-               Mesh.nGon(5), //Hexagon
-               Mesh.nGon(6), //Pentagon
-               Mesh.nStar(2, .5, 1), //Diamond
-               Mesh.nStar(5, 0.4, 1), //Star
-               Mesh.bat() //Bat
-            ];
+     //Draw Mode Enum
+     const DrawMode = {
+         FillRect: 0,
+         StretchRotate: 1,
+     };
 
-            //Draw variables set by user
-            let drawMode = $("#selectDrawMode").val();
-            let mesh = Meshes[$("#selectShape").val()];
-            let fillColor = $("#pickFillColor").val();
-            let strokeColor = $("#pickStrokeColor").val();
-            let lineWidth = 6;
+     //Meshes array
+     const Meshes = [
+        Mesh.nGon(5), //Hexagon
+        Mesh.nGon(6), //Pentagon
+        Mesh.nStar(2, .5, 1), //Diamond
+        Mesh.nStar(5, 0.4, 1), //Star
+        Mesh.bat() //Bat
+     ];
 
-            //Listen for change in draw variables
-            $("#selectDrawMode").change(function () {
-                //Val refers to order of option in list and corresponds to enum DrawMode
-                drawMode = $(this).find("option:selected").val();
-            });
-            $("#selectShape").change(function () {
-                //Val refers to order of option in index of Meshes array
-                mesh = Meshes[$(this).val()];
-            })
-            $("#pickFillColor").change(function () {
-                fillColor = $(this).val();
-            })
-            $("#pickStrokeColor").change(function () {
-                strokeColor = $(this).val();
-            })
+     //Draw variables set by user
+     let drawMode = $("#selectDrawMode").val();
+     let mesh = Meshes[$("#selectShape").val()];
+     let fillColor = $("#pickFillColor").val();
+     let strokeColor = $("#pickStrokeColor").val();
+     let lineWidth = 6;
 
-            //Canvas variables
-            const canvas = document.getElementById("canvas");
-            const ctx = canvas.getContext("2d");
-            //Mouse drag listener
-            const surface = new Surface(canvas, onMouseDown, onMouseMove, onMouseUp, onMouseOut, true);
+     //Listen for change in draw variables
+     $("#selectDrawMode").change(function () {
+         //Val refers to order of option in list and corresponds to enum DrawMode
+         drawMode = $(this).find("option:selected").val();
+     });
+     $("#selectShape").change(function () {
+         //Val refers to order of option in index of Meshes array
+         mesh = Meshes[$(this).val()];
+     })
+     $("#pickFillColor").change(function () {
+         fillColor = $(this).val();
+     })
+     $("#pickStrokeColor").change(function () {
+         strokeColor = $(this).val();
+     })
 
-            //Set initial text on canvas
-            ctx.font = "16px sans-serif";
-            ctx.fillText("Click and drag to draw shape.", 10, 50);
+     //Canvas variables
+     const canvas = document.getElementById("canvas");
+     const ctx = canvas.getContext("2d");
+     //Mouse drag listener
+     const surface = new Surface(canvas, onMouseDown, onMouseMove, onMouseUp, onMouseOut, true);
 
-            //Shapes to render
-            let shape = new Rect(0, 0, 0, 0);
+     //Set initial text on canvas
+     ctx.font = "16px sans-serif";
+     ctx.fillText("Click and drag to draw shape.", 10, 50);
 
-            let selectionBox = new Rect(0, 0, 0, 0);
-            selectionBox.lineWidth = 4;
-            selectionBox.strokeColor = 'blue';
-            selectionBox.fillColor = 'lightBlue';
+     //Shapes to render
+     let shape = new Rect(0, 0, 0, 0);
 
-            let stretchLine = Path.withCapacity(2);
-            stretchLine.lineWidth = 4;
-            stretchLine.strokeColor = 'red';
+     let selectionBox = new Rect(0, 0, 0, 0);
+     selectionBox.lineWidth = 4;
+     selectionBox.strokeColor = 'blue';
+     selectionBox.fillColor = 'lightBlue';
 
-            //Mouse tracking variable
-            let start;
+     let stretchLine = Path.withCapacity(2);
+     stretchLine.lineWidth = 4;
+     stretchLine.strokeColor = 'red';
 
-            function onMouseDown(mouseX, mouseY) {
-                //Convert to point and save
-                start = new Point(mouseX, mouseY);
-                //Init our shape
-                shape = Shape.fromMesh(mesh, fillColor);
-                shape.points.data.fill(0);
-                shape.lineWidth = lineWidth;
-                shape.strokeColor = strokeColor;
-            }
+     //Mouse tracking variable
+     let start;
 
-            function onMouseMove(mouseX, mouseY) {
-                //Convert to point
-                let mouse = new Point(mouseX, mouseY);
+     function onMouseDown(mouseX, mouseY) {
+         //Convert to point and save
+         start = new Point(mouseX, mouseY);
+         //Init our shape
+         shape = Shape.fromMesh(mesh, fillColor);
+         shape.points.data.fill(0);
+         shape.lineWidth = lineWidth;
+         shape.strokeColor = strokeColor;
+     }
 
-                if (drawMode == DrawMode.FillRect) {
-                    //Calculate rect
-                    let dx = mouse.x - start.x;
-                    let dy = mouse.y - start.y;
-                    let rect = Rect.fromDimensions(start.x, start.y, dx, dy);
-                    //Update shape
-                    shape.setBounds(rect, ScaleToFit.Fill);
-                    //Update selection box
-                    selectionBox.set(rect);
-                } else if (drawMode == DrawMode.StretchRotate) {
-                    //Update shape
-                    shape.setEndPoints(start, mouse);
-                    //Update line
-                    stretchLine.setPoint(start, 0);
-                    stretchLine.setPoint(mouse, 1);
-                }
+     function onMouseMove(mouseX, mouseY) {
+         //Convert to point
+         let mouse = new Point(mouseX, mouseY);
 
-                // clear the canvas and redraw all shapes
-                canvas.draw();
-            }
+         if (drawMode == DrawMode.FillRect) {
+             //Calculate rect
+             let dx = mouse.x - start.x;
+             let dy = mouse.y - start.y;
+             let rect = Rect.fromDimensions(start.x, start.y, dx, dy);
+             //Update shape
+             shape.setBounds(rect, ScaleToFit.Fill);
+             //Update selection box
+             selectionBox.set(rect);
+         } else if (drawMode == DrawMode.StretchRotate) {
+             //Update shape
+             shape.setEndPoints(start, mouse);
+             //Update line
+             stretchLine.setPoint(start, 0);
+             stretchLine.setPoint(mouse, 1);
+         }
 
-            function onMouseUp() {
-                if (drawMode == DrawMode.FillRect) {
-                    //Remove selection box
-                    selectionBox.setEmpty();
-                } else if (drawMode == DrawMode.StretchRotate) {
-                    //Remove line
-                    stretchLine.data.fill(0);
-                }
-                canvas.draw();
-            }
+         // clear the canvas and redraw all shapes
+         canvas.draw();
+     }
 
-            function onMouseOut() {
-                onMouseUp();
-            }
+     function onMouseUp() {
+         if (drawMode == DrawMode.FillRect) {
+             //Remove selection box
+             selectionBox.setEmpty();
+         } else if (drawMode == DrawMode.StretchRotate) {
+             //Remove line
+             stretchLine.data.fill(0);
+         }
+         canvas.draw();
+     }
 
-            canvas.draw = function() {
-                // clear the canvas
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                // redraw all shapes in their current positions
-                if (drawMode == DrawMode.FillRect) {
-                    selectionBox.draw(ctx);
-                    shape.draw(ctx);
-                } else if (drawMode == DrawMode.StretchRotate) {
-                    shape.draw(ctx);
-                    stretchLine.draw(ctx);
-                }
-            }
+     function onMouseOut() {
+         onMouseUp();
+     }
 
-        });
-</script>
+     canvas.draw = function() {
+         // clear the canvas
+         ctx.clearRect(0, 0, canvas.width, canvas.height);
+         // redraw all shapes in their current positions
+         if (drawMode == DrawMode.FillRect) {
+             selectionBox.draw(ctx);
+             shape.draw(ctx);
+         } else if (drawMode == DrawMode.StretchRotate) {
+             shape.draw(ctx);
+             stretchLine.draw(ctx);
+         }
+     }
+
+ });
