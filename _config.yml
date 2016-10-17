@@ -1,4 +1,4 @@
 	# File: _config.yml
-	name: mark reho
+	name: mark rehob
 	markdown: kramdown
 	permalink: /blog/:year/:month/:day/:title
