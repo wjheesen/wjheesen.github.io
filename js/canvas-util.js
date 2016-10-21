@@ -25,7 +25,7 @@ class Point {
         return (y1 > this.y) !== (y2 > this.y) && this.x < (x2 - x1) * (this.y - y1) / (y2 - y1) + x1;
     }
 
-    translate(x,y) {
+    offset(x,y) {
         this.x += x;
         this.y += y;
     }
@@ -194,7 +194,7 @@ class Rect {
             this.bottom <= other.bottom && other.top <= this.top;
     }
     containsPoint(pt) {
-        return this.containsPoint(pt.x, pt.y);
+        return this.contains(pt.x, pt.y);
     }
     contains(x, y) {
         return this.left <= x && x <= this.right && this.bottom <= y && y <= this.top;
@@ -273,10 +273,16 @@ class Rect {
 
 class Matrix {
 
-    constructor(m11, m12, m13, m21, m22, m23, m31, m32, m33) {
+    constructor(m11, m12, m13, m21, m22, m23) {
         this.m11 = m11; this.m12 = m12; this.m13 = m13;
         this.m21 = m21; this.m22 = m22; this.m23 = m23;
-        this.m31 = m31; this.m32 = m32; this.m33 = m33;
+    }
+
+    static identity() {
+        return new Matrix(
+           1, 0, 0,  //row 1
+           0, 1, 0   //row 2
+        );
     }
 
     static rectToRect(src, dst, stf) {
@@ -383,8 +389,7 @@ class Matrix {
     static translate(dx, dy) {
         return new Matrix(
             1, 0, dx,  //row 1
-            0, 1, dy,  //row 2
-            0, 0, 1    //row 3
+            0, 1, dy   //row 2
        );
     }
 
@@ -393,6 +398,24 @@ class Matrix {
         matrix.setConcat(left, right);
         return matrix;
     }
+
+    determinant() {
+        return (this.m11 * this.m22) - (this.m12 * this.m21);
+    }
+
+    inverse() {
+        let invDet = 1 / this.determinant();
+        let m11 = this.m22 * invDet;
+        let m12 = -this.m12 * invDet;
+        let m13 = ((this.m12 * this.m23) - (this.m13 * this.m22)) * invDet;
+        let m21 = -this.m21 * invDet;
+        let m22 = this.m11 * invDet;
+        let m23 = ((this.m21 * this.m13) - (this.m11 * this.m23)) * invDet;
+        return new Matrix(
+            m11, m12, m13,
+            m21, m22, m23
+            );
+     }
 
     moveOrigin(dx, dy) {
         //Conjugate by a translation of vector (dx,dy):
@@ -432,15 +455,12 @@ class Matrix {
         //Copy the first column
         let r1c1 = this.m11;
         let r2c1 = this.m21;
-        let r3c1 = this.m31;
         //Update the first column
         this.m11 = r1c1 * cos + this.m12 * sin; //row1*(cos,sin,0)
         this.m21 = r2c1 * cos + this.m22 * sin; //row2*(cos,sin,0)
-        this.m31 = r3c1 * cos + this.m32 * sin; //row3*(cos,sin,0)
         //Update the second column
         this.m12 = r1c1 * -sin + this.m12 * cos; //row1*(-sin,cos,0)
         this.m22 = r2c1 * -sin + this.m22 * cos; //row2*(-sin,cos,0)
-        this.m32 = r3c1 * -sin + this.m32 * cos; //row3*(-sin,cos,0)
         //Third column does not change
     }
     postScale(widthRatio, heightRatio) {
@@ -457,11 +477,9 @@ class Matrix {
         //Multiply first column by width ratio
         this.m11 *= widthRatio;
         this.m21 *= widthRatio;
-        this.m31 *= widthRatio;
         //Multiply second column by height ratio
         this.m12 *= heightRatio;
         this.m22 *= heightRatio;
-        this.m32 *= heightRatio;
     }
     postStretch(ratio) {
         this.postScale(ratio, ratio);
@@ -480,34 +498,28 @@ class Matrix {
         this.m23 += this.m21 * x + this.m22 * y;
     }
 
-    set(m11, m12, m13, m21, m22, m23, m31, m32, m33) {
+    set(m11, m12, m13, m21, m22, m23) {
         this.m11 = m11; this.m12 = m12; this.m13 = m13;
         this.m21 = m21; this.m22 = m22; this.m23 = m23;
-        this.m31 = m31; this.m32 = m32; this.m33 = m33;
     }
+
     setConcat(left, right) {
         this.set(
             //Calculate the first row, fixing the first left hand row
             //and moving across each of the right hand columns
-            left.m11 * right.m11 + left.m12 * right.m21 + left.m13 * right.m31,
-            left.m11 * right.m12 + left.m12 * right.m22 + left.m13 * right.m32,
-            left.m11 * right.m13 + left.m12 * right.m23 + left.m13 * right.m33,
+            left.m11 * right.m11 + left.m12 * right.m21,
+            left.m11 * right.m12 + left.m12 * right.m22,
+            left.m11 * right.m13 + left.m12 * right.m23 + left.m13,
             //Calculate the second row, fixing the second left hand row
             //and moving across each of the right hand columns
-            left.m21 * right.m11 + left.m22 * right.m21 + left.m23 * right.m31,
-            left.m21 * right.m12 + left.m22 * right.m22 + left.m23 * right.m32,
-            left.m21 * right.m13 + left.m22 * right.m23 + left.m23 * right.m33,
-            //Calculate the third row, fixing the third left hand row
-            //and moving across each of the right hand columns
-            left.m31 * right.m11 + left.m32 * right.m21 + left.m33 * right.m31,
-            left.m31 * right.m12 + left.m32 * right.m22 + left.m33 * right.m32,
-            left.m31 * right.m13 + left.m32 * right.m23 + left.m33 * right.m33
+            left.m21 * right.m11 + left.m22 * right.m21,
+            left.m21 * right.m12 + left.m22 * right.m22,
+            left.m21 * right.m13 + left.m22 * right.m23 + left.m23
             );
     }
     setIdentity() {
         this.m11 = 1; this.m12 = 0; this.m13 = 0;
         this.m21 = 0; this.m22 = 1; this.m23 = 0;
-        this.m31 = 0; this.m32 = 0; this.m33 = 1;
     }
     setRectToRect(src, dst, stf) {
 
@@ -539,8 +551,8 @@ class Matrix {
         //Set the matrix to translate the src point to the origin
         this.setTranslate(-srcPoint.x, -srcPoint.y);
 
-        //Next, set the matrix to scale the src rect so it is big (or small) enough 
-        //to fit inside the dst rect with at least one side matching in width or height. 
+        //Next, set the matrix to scale the src rect so it is big (or small) enough
+        //to fit inside the dst rect with at least one side matching in width or height.
         //If we're not maintaining aspect ratio
         if (stf === ScaleToFit.Fill) {
             //We can scale with different width and height ratios, allowing for
@@ -568,13 +580,11 @@ class Matrix {
         //Set the matrix to rotate about the origin (0,0)
         this.m11 = cos; this.m12 = -sin; this.m13 = 0;
         this.m21 = sin; this.m22 = cos; this.m23 = 0;
-        this.m31 = 0; this.m32 = 0; this.m33 = 1;
     }
     setScale(widthRatio, heightRatio) {
         //Set the matrix to scale about the origin (0,0)
-        this.m11 = widthRatio; this.m12 = 0; this.m13 = 0;
-        this.m21 = 0; this.m22 = heightRatio; this.m23 = 0;
-        this.m31 = 0; this.m32 = 0; this.m33 = 1;
+        this.m11 = widthRatio; this.m12 = 0;           this.m13 = 0;
+        this.m21 = 0;          this.m22 = heightRatio; this.m23 = 0;
     }
     setStretch(ratio) {
         //Set the matrix to scale vertically and horizontally
@@ -585,7 +595,6 @@ class Matrix {
         //Set the matrix to translate by vector (dx,dy)
         this.m11 = 1; this.m12 = 0; this.m13 = dx;
         this.m21 = 0; this.m22 = 1; this.m23 = dy;
-        this.m31 = 0; this.m32 = 0; this.m33 = 1;
     }
 
     mapPoint(src, dst) {
@@ -641,7 +650,7 @@ class Matrix {
     }
 
     toString() {
-        return `m11: ${this.m11}, m12: ${this.m12}, m13: ${this.m13}, m21: ${this.m21}, m22: ${this.m22}, m23: ${this.m23}, m31: ${this.m31}, m32: ${this.m32}, m33: ${this.m33}`;
+        return `m11: ${this.m11}, m12: ${this.m12}, m13: ${this.m13}, m21: ${this.m21}, m22: ${this.m22}, m23: ${this.m23}`;
     }
 }
 
@@ -696,14 +705,14 @@ class Path {
         this.data.set(data, this.offset * 2);
     }
 
-    get(index) {
+    pointAt(index) {
         let dataIndex = index * 2;
         let x = this.data[dataIndex];
         let y = this.data[dataIndex + 1];
         return new Point(x, y);
     }
     pointBetween(index1, index2) {
-        return Point.midpointOf(this.get(index1), this.get(index2));
+        return Point.midpointOf(this.pointAt(index1), this.pointAt(index2));
     }
 
     calculateBounds() {
@@ -713,17 +722,17 @@ class Path {
         return Rect.fromUnion(this.data, offset * 2, count);
     }
 
-    contains(pt) {
-        return this.contains(pt, 0, this.count);
+    containsPoint(pt) {
+        return this.containsPointInSubset(pt, 0, this.count);
     }
-    containsInSubset(pt, first, count) {
+    containsPointInSubset(pt, first, count) {
         //Assume the point is not inside the subset
         let inside = false;
 
         for (let curr = first, prev = count - 1; curr < count; prev = curr++) {
-            let p1 = this.get(prev);
-            let p2 = this.get(curr);
-            if (pt.isInside(p1.X, p1.Y, p2.X, p2.Y)) {
+            let p1 = this.pointAt(prev);
+            let p2 = this.pointAt(curr);
+            if (pt.isInside(p1.x, p1.y, p2.x, p2.y)) {
                 inside = !inside;
             }
         }
@@ -777,9 +786,9 @@ class Path {
 
 class Mesh {
 
-    constructor(basisPoints, fixedPoint, controlPoint) {
-        this.basisPoints = basisPoints;
-        this.basisBounds = basisPoints.calculateBounds();
+    constructor(path, fixedPoint, controlPoint) {
+        this.path = path;
+        this.bounds = path.calculateBounds();
         this.fixedPoint = fixedPoint;
         this.controlPoint = controlPoint;
     }
@@ -798,11 +807,11 @@ class Mesh {
             path.putPoint(end);
         }
         //Determine the fixed point
-        let fixedPoint = path.get(0);
+        let fixedPoint = path.pointAt(0);
         //Determine the control point:
         //If n is odd, return the point between halfN and halfN+1; else return the point at halfN.
         let halfN = Math.floor(n / 2);
-        let controlPoint = (n & 1) ? path.pointBetween(halfN, halfN + 1) : path.get(halfN);
+        let controlPoint = (n & 1) ? path.pointBetween(halfN, halfN + 1) : path.pointAt(halfN);
         //Construct the mesh and return
         return new Mesh(path, fixedPoint, controlPoint);
     }
@@ -833,10 +842,10 @@ class Mesh {
             path.putPoint(innerVertex);
         }
         //Determine the fixed point
-        let fixedPoint = path.get(0);
+        let fixedPoint = path.pointAt(0);
         //Determine the control point:
         ////If n is odd, return the point between n-1 and n+1; else return the point at n.
-        let controlPoint = (n & 1) ? path.pointBetween(n - 1, n + 1) : path.get(n);
+        let controlPoint = (n & 1) ? path.pointBetween(n - 1, n + 1) : path.pointAt(n);
         //Construct the mesh and return
         return new Mesh(path, fixedPoint, controlPoint);
     }
@@ -871,50 +880,23 @@ class Mesh {
         path.transform(Matrix.scaleAboutOrigin(1, -1));
         //Determine the fixed point and control point
         let fixedPoint = path.pointBetween(1, 19);
-        let controlPoint = path.get(10);
+        let controlPoint = path.pointAt(10);
         //Construct the mesh and return
         return new Mesh(path, fixedPoint, controlPoint);
     }
 
-    copyBasisPoints() { return Path.fromPath(this.basisPoints); }
-    copyBasisBounds() { return Rect.fromRect(this.basisBounds); }
-
-    updateShapeRect(shapeRect, shapePath, offset, rect, stf) {
-        //Copy the basis path and basis rect into the shape at the specified offset
-        shapePath.setPath(this.basisPoints, offset);
-        shapeRect.set(this.basisBounds);
-        //Calculate the rect to rect matrix
-        let matrix = Matrix.rectToRect(this.basisBounds, rect, stf);
-        //Apply the transformation to the shape path and rect
-        shapePath.transformSubset(matrix, offset, this.basisPoints.count);
-        matrix.mapRect(shapeRect);
-        //matrix.log();
-        //shapePath.log();
-        //shapeRect.log();
-    }
-    updateShapeEndpoints(shapeRect, shapePath, offset, start, end) {
-        //Copy the basis path and basis rect into the shape at the specified offset
-        shapePath.setPath(this.basisPoints, offset);
-        shapeRect.set(this.basisBounds);
-        //Compute the vector from the fixed point to the specified start point
-        let toStart = Vec2.from(this.fixedPoint, start);
-        //Apply the translation to the control point
-        let translatedControlPoint = new Point(this.controlPoint.x + toStart.x, this.controlPoint.y + toStart.y);
-        //Create a matrix to stretch-rotate the control point onto the specified end point.
-        //Note: start = translation.mapPoint(this.fixedPoint) = translatedFixedPoint
-        let matrix = Matrix.stretchRotateFrom(start, translatedControlPoint, end);
-        //Pre translate by the vector we calculated
-        matrix.preTranslate(toStart.x,toStart.y);
-        //Apply the transformation to the shape path and rect
-        shapePath.transformSubset(matrix, offset, this.basisPoints.count);
-        matrix.mapRect(shapeRect);
+    contains(pt) {
+        //First check if the point lies inside the boundaries of this mesh
+        //If it does, check if the point also lies inside the path
+        return this.bounds.containsPoint(pt) && this.path.containsPoint(pt);
     }
 
     log() {
         console.log(this.toString());
     }
+
     toString() {
-        return `basisPoints: ${this.basisPoints.toString()}, basisBounds: ${this.basisBounds.toString()},
+        return `path: ${this.path.toString()}, bounds: ${this.bounds.toString()},
                     fixedPoint: ${this.fixedPoint}, controlPoint: ${this.controlPoint}`;
     }
 
@@ -922,59 +904,57 @@ class Mesh {
 
 class Shape {
 
-    constructor(mesh, points, bounds, fillColor) {
+    constructor(mesh, fillColor, matrix) {
         this.mesh = mesh;
-        this.points = points;
-        this.bounds = bounds;
         this.fillColor = fillColor;
-    }
-
-    static fromMesh(mesh, fillColor) {
-        return new Shape(
-            mesh,
-            mesh.copyBasisPoints(),
-            mesh.copyBasisBounds(),
-            fillColor);
+        this.matrix = matrix;
     }
 
     setBounds(rect, stf) {
-        //Reset path to basis vertices, in case the
-        //shape no longer maintains aspect ratio
-        this.mesh.updateShapeRect(this.bounds, this.points, 0, rect, stf);
+        //Calculate the rect to rect matrix
+        this.matrix = Matrix.rectToRect(this.mesh.bounds, rect, stf);
     }
+
     setEndPoints(start, end) {
-        //Reset path to basis vertices, in case the
-        //shape no longer maintains aspect ratio
-        this.mesh.updateShapeEndpoints(this.bounds, this.points, 0, start, end);
+        //Compute the vector from the mesh's fixed point to the specified start point
+        let toStart = Vec2.from(this.mesh.fixedPoint, start);
+        //Copy the mesh's control point and translate it by our vector.
+        let controlPoint = Point.fromPoint(this.mesh.controlPoint);
+        controlPoint.offset(toStart.x, toStart.y);
+        //Create a matrix to stretch-rotate the control point onto the specified end point.
+        this.matrix = Matrix.stretchRotateFrom(start, controlPoint, end);
+        //Pre translate by the vector we calculated
+        this.matrix.preTranslate(toStart.x, toStart.y);
     }
 
-    contains(point) {
-        return this.bounds.containsPoint(point) && this.points.contains(point);
-    }
-
-    transform(matrix) {
-        this.points.transform(matrix);
-        matrix.mapRect(this.rect);
-    }
-    translate(x, y) {
-        this.bounds.translate(x, y);
-        this.points.translate(x, y);
-    }
-    scaleToFit(rect, stf) {
-        //Create the rect to rect matrix transformation using the specified scale to fit option
-        let matrix = Matrix.rectToRect(this.bounds, rect, stf);
-        //Use it to transform this shape
-        this.transform(matrix);
+    containsPoint(point) {
+        //Convert the point to basis (mesh) coordinates
+        let inverse = this.matrix.inverse();
+        let basisPoint = new Point();
+        inverse.mapPoint(point, basisPoint);
+        //This shape contains the point if its mesh contains the basis point
+        return this.mesh.contains(basisPoint);
     }
 
     draw(ctx) {
 
+        if (!this.matrix) {
+            return;
+        }
+
         ctx.beginPath();
 
-        let data = this.points.data;
-        ctx.moveTo(data[0], data[1]);
+        let data = this.mesh.path.data;
+
+        let x = data[0];
+        let y = data[1];
+
+        ctx.moveTo(this.matrix.mapX(x, y), this.matrix.mapY(x, y));
+
         for (let i = 2; i < data.length;) {
-            ctx.lineTo(data[i++], data[i++]);
+            x = data[i++];
+            y = data[i++];
+            ctx.lineTo(this.matrix.mapX(x,y), this.matrix.mapY(x,y));
         }
 
         ctx.closePath();
@@ -989,7 +969,6 @@ class Shape {
             ctx.fillStyle = this.fillColor;
             ctx.fill();
         }
-
     }
 
     log() {
@@ -997,13 +976,13 @@ class Shape {
     }
 
     toString() {
-        return `points: ${this.points.toString()}, bounds: ${this.bounds.toString()}, fillColor: ${this.fillColor}`;
+        return `mesh: ${this.mesh.toString()}, fillColor: ${this.fillColor}, matrix: ${this.matrix}`;
     }
 }
 
-class Surface {
+class DragDetector {
 
-    constructor(canvas, onMouseDown, onMouseMove, onMouseUp, onMouseOut, fillWidth) {
+    constructor(canvas, onDown, onDrag, onUp, onOut, fillWidth) {
 
         //Keep track of canvas offset
         let offsetX = 0;
@@ -1021,11 +1000,11 @@ class Surface {
             canvas.style.width = '100%';
             canvas.width = canvas.offsetWidth;
         }
-        
+
         //Get initial offsets
         reOffset();
 
-        // Listen for resize and scroll 
+        // Listen for resize and scroll
         window.onscroll = reOffset;
         canvas.onresize = reOffset;
         window.onresize = reOffset;
@@ -1040,33 +1019,33 @@ class Surface {
         // Listen for mouse drag events
         let isDragging = false;
 
-        canvas.onmousedown = function (e) {
+        function onPointerDown(e) {
             // tell the browser we're handling this event
             e.preventDefault();
             e.stopPropagation();
             // set the isDragging flag
             isDragging = true;
             // calculate the current mouse position
-            let mouseX = e.clientX - offsetX;
-            let mouseY = e.clientY - offsetY;
+            let pointerX = e.clientX - offsetX;
+            let pointerY = e.clientY - offsetY;
             // send callback
-            onMouseDown(mouseX, mouseY);
+            onDown(pointerX,pointerY);
         }
 
-        canvas.onmousemove = function (e) {
+        function onPointerMove(e) {
             // return if we're not dragging
             if (!isDragging) { return; }
             // tell the browser we're handling this event
             e.preventDefault();
             e.stopPropagation();
             // calculate the current mouse position
-            let mouseX = e.clientX - offsetX;
-            let mouseY = e.clientY - offsetY;
+            let pointerX = e.clientX - offsetX;
+            let pointerY = e.clientY - offsetY;
             // send callback
-            onMouseMove(mouseX, mouseY);
+            onDrag(pointerX, pointerY);
         }
 
-        canvas.onmouseup = function (e) {
+        function onPointerUp(e) {
             // return if we're not dragging
             if (!isDragging) { return; }
             // tell the browser we're handling this event
@@ -1075,10 +1054,10 @@ class Surface {
             // the drag is over -- clear the isDragging flag
             isDragging = false;
             // send callback
-            onMouseUp();
+            onUp();
         }
 
-        canvas.onmouseout = function (e) {
+        function onPointerOut(e) {
             // return if we're not dragging
             if (!isDragging) { return; }
             // tell the browser we're handling this event
@@ -1087,8 +1066,24 @@ class Surface {
             // the drag is over -- clear the isDragging flag
             isDragging = false;
             // send callback
-            onMouseOut();
+            onOut();
         }
+
+
+        if (window.PointerEvent) {
+            // Pointer events are supported.
+            $(canvas).on("pointerdown", onPointerDown);
+            $(canvas).on("pointermove", onPointerMove);
+            $(canvas).on("pointerup", onPointerUp);
+            $(canvas).on("pointerout", onPointerOut);
+        } else {
+            canvas.onmousedown = onPointerDown;
+            canvas.onmousemove = onPointerMove;
+            canvas.onmouseup = onPointerUp;
+            canvas.onmouseout = onPointerOut;
+        }
+
+
     }
 
 
