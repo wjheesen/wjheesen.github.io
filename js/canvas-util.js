@@ -25,7 +25,7 @@ class Point {
         return (y1 > this.y) !== (y2 > this.y) && this.x < (x2 - x1) * (this.y - y1) / (y2 - y1) + x1;
     }
 
-    offset(x,y) {
+    offset(x, y) {
         this.x += x;
         this.y += y;
     }
@@ -112,7 +112,7 @@ class Rect {
     static fromRect(rect) {
         return new Rect(rect.left, rect.top, rect.right, rect.bottom);
     }
-    static fromLBRT(left, bottom, right, top){
+    static fromLBRT(left, bottom, right, top) {
         return new Rect(left, top, right, bottom);
     }
     static fromTwoPoints(p1, p2) {
@@ -185,8 +185,8 @@ class Rect {
 
     topLeft() { return new Point(this.left, this.top); }
     bottomLeft() { return new Point(this.left, this.bottom); }
-    bottomRight() { return new Point(this.right, this.bottom) }
-    topRight() { return new Point(this.right, this.top) }
+    bottomRight() { return new Point(this.right, this.bottom); }
+    topRight() { return new Point(this.right, this.top); }
 
     center() { return new Point(this.centerX(), this.centerY()); }
     centerX() { return 0.5 * (this.left + this.right); }
@@ -383,9 +383,9 @@ class Matrix {
 
         //Set the matrix to stretch rotate by the values we calculated
         let matrix = new Matrix();
-        matrix.setSinCos(sin,cos);
+        matrix.setSinCos(sin, cos);
         matrix.postStretch(ratio);
-        matrix.moveOrigin(center.x,center.y);
+        matrix.moveOrigin(center.x, center.y);
         return matrix;
     }
 
@@ -418,7 +418,7 @@ class Matrix {
             m11, m12, m13,
             m21, m22, m23
             );
-     }
+    }
 
     moveOrigin(dx, dy) {
         //Conjugate by a translation of vector (dx,dy):
@@ -586,8 +586,8 @@ class Matrix {
     }
     setScale(widthRatio, heightRatio) {
         //Set the matrix to scale about the origin (0,0)
-        this.m11 = widthRatio; this.m12 = 0;           this.m13 = 0;
-        this.m21 = 0;          this.m22 = heightRatio; this.m23 = 0;
+        this.m11 = widthRatio; this.m12 = 0; this.m13 = 0;
+        this.m21 = 0; this.m22 = heightRatio; this.m23 = 0;
     }
     setStretch(ratio) {
         //Set the matrix to scale vertically and horizontally
@@ -673,7 +673,7 @@ class Path {
     }
     static withCapacity(capacity) {
         let reqFloats = capacity * 2;
-        let reqBytes = reqFloats * Float32Array.BYTES_PER_ELEMENT
+        let reqBytes = reqFloats * Float32Array.BYTES_PER_ELEMENT;
         let buf = new ArrayBuffer(reqBytes);
         let data = new Float32Array(buf, 0, reqFloats);
         return new Path(data);
@@ -856,28 +856,28 @@ class Mesh {
         //We need 20 vertices to define the bat
         let path = Path.withCapacity(20);
         //CENTER TOP
-        path.put(0,3); //V0
+        path.put(0, 3); //V0
         //LEFT
-        path.put(-2,5);//V1
-        path.put(-3,2);//V2
-        path.put(-5,0);//V3
-        path.put(-8,3);//V4
-        path.put(-10,7);//V5
-        path.put(-17,10);//V6
-        path.put(-13,5);//V7
-        path.put(-12,-1);//V8
-        path.put(-3,-7);//V9
+        path.put(-2, 5);//V1
+        path.put(-3, 2);//V2
+        path.put(-5, 0);//V3
+        path.put(-8, 3);//V4
+        path.put(-10, 7);//V5
+        path.put(-17, 10);//V6
+        path.put(-13, 5);//V7
+        path.put(-12, -1);//V8
+        path.put(-3, -7);//V9
         //CENTER BOT
-        path.put(0,-10);//V10
+        path.put(0, -10);//V10
         //RIGHT
-        path.put(3,-7);//V11
-        path.put(12,-1);//V12
-        path.put(13,5);//V13
-        path.put(17,10);//V14
-        path.put(10,7);//V15
-        path.put(8,3);//V16
-        path.put(5,0);//V17
-        path.put(3,2);//V18
+        path.put(3, -7);//V11
+        path.put(12, -1);//V12
+        path.put(13, 5);//V13
+        path.put(17, 10);//V14
+        path.put(10, 7);//V15
+        path.put(8, 3);//V16
+        path.put(5, 0);//V17
+        path.put(3, 2);//V18
         path.put(2, 5);//V19
         //Flip the path because html5 canvas is upside down
         path.transform(Matrix.scaleAboutOrigin(1, -1));
@@ -957,7 +957,7 @@ class Shape {
         for (let i = 2; i < data.length;) {
             x = data[i++];
             y = data[i++];
-            ctx.lineTo(this.matrix.mapX(x,y), this.matrix.mapY(x,y));
+            ctx.lineTo(this.matrix.mapX(x, y), this.matrix.mapY(x, y));
         }
 
         ctx.closePath();
@@ -999,7 +999,7 @@ class DragDetector {
         }
 
         //A function to fill the width of the screen
-        function fillParentWidth(){
+        function fillParentWidth() {
             canvas.style.width = '100%';
             canvas.width = canvas.offsetWidth;
         }
@@ -1017,7 +1017,7 @@ class DragDetector {
                 fillParentWidth();
                 reOffset();
                 canvas.draw();
-            }
+            };
         }
         // Listen for mouse drag events
         let isDragging = false;
@@ -1032,7 +1032,7 @@ class DragDetector {
             let pointerX = e.clientX - offsetX;
             let pointerY = e.clientY - offsetY;
             // send callback
-            onDown(pointerX,pointerY);
+            onDown(pointerX, pointerY);
         }
 
         function onPointerMove(e) {

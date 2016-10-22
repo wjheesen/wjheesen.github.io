@@ -3,7 +3,7 @@ $(document).ready(function () {
     //Draw Mode Enum
     const DrawMode = {
         FillRect: 0,
-        StretchRotate: 1,
+        StretchRotate: 1
     };
 
     //Meshes array
@@ -30,13 +30,13 @@ $(document).ready(function () {
     $("#selectShape").change(function () {
         //Val refers to order of option in index of Meshes array
         mesh = Meshes[$(this).val()];
-    })
+    });
     $("#pickFillColor").change(function () {
         fillColor = $(this).val();
-    })
+    });
     $("#pickStrokeColor").change(function () {
         strokeColor = $(this).val();
-    })
+    });
 
     //Canvas variables
     const canvas = document.getElementById("canvas");
