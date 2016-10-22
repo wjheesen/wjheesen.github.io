@@ -78,10 +78,8 @@ $(document).ready(function () {
         let mouse = new Point(mouseX, mouseY);
 
         if (drawMode == DrawMode.FillRect) {
-            //Calculate rect
-            let dx = mouse.x - start.x;
-            let dy = mouse.y - start.y;
-            let rect = Rect.fromDimensions(start.x, start.y, dx, dy);
+            //Calculate rect from start to mouse
+            let rect = Rect.fromLBRT(start.x, start.y, mouse.x, mouse.y);
             //Update shape
             shape.setBounds(rect, ScaleToFit.Fill);
             //Update selection box

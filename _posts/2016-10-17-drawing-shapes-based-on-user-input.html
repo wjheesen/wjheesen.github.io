@@ -47,7 +47,7 @@ date: 2016-10-17
     </div>
 </form>
 
-<canvas id="canvas" height="300" style="width: 100%;">
+<canvas id="canvas" width="1140" height="300" style="width: 100%;">
     Your browser doesn't appear to support the canvas element.
 </canvas>
 
@@ -129,7 +129,7 @@ date: 2016-10-17
 <p>
     Note that each time you move the mouse, the canvas recalculates the rectangle or line to match the start and end points of your gesture,
     then transforms the shape accordingly. Finally, the canvas redraws itself to give the illusion of movement. These steps are conceptually simple,
-    but require a large degree of structure to implement; in particular, <em>you will need...</em>
+    but require some structure to implement; in particular, <em>you will need...</em>
 </p>
 
 <dl class="dl-horizontal">
@@ -166,7 +166,7 @@ date: 2016-10-17
 </dl>
 
 <p>
-    The next five sections will help you put the structure in place, and then the last two sections will help you implement both of the drawing methods.
+    The next five sections help you put the structure in place, and then the last two sections help you implement both of the drawing methods.
 </p>
 
 <h2 id="drawing-project">1.0 Start a drawing project</h2>
@@ -420,7 +420,7 @@ date: 2016-10-17
 <tr>
     <td>
         <a href="#point-properties-1" data-toggle="collapse">
-            <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">distanceToOrigin</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code>
+            <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">float</span> <span class="token function">distanceToOrigin</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code>
         </a>
         <p>Computes the distance from this point to the origin (0,0).</p>
         <div id="point-properties-1" class="collapse">
@@ -433,7 +433,7 @@ date: 2016-10-17
 <tr>
     <td>
         <a href="#point-properties-2" data-toggle="collapse">
-            <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">distanceToPoint</span><span class="token punctuation">(</span>Point other<span class="token punctuation">)</span></code>
+            <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">float</span> <span class="token function">distanceToPoint</span><span class="token punctuation">(</span>Point other<span class="token punctuation">)</span></code>
         </a>
         <p>Computes the distance from this point to the other point.</p>
         <div id="point-properties-2" class="collapse">
@@ -446,7 +446,7 @@ date: 2016-10-17
 <tr>
     <td>
         <a href="#point-properties-3" data-toggle="collapse">
-            <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">distanceToPoint</span><span class="token punctuation">(</span><span class="token keyword">float</span> x<span class="token punctuation">,</span> <span class="token keyword">float</span> y<span class="token punctuation">)</span></code>
+            <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">float</span> <span class="token function">distanceToPoint</span><span class="token punctuation">(</span><span class="token keyword">float</span> x<span class="token punctuation">,</span> <span class="token keyword">float</span> y<span class="token punctuation">)</span></code>
         </a>
         <p>Computes the distance from this point to the point (x,y).</p>
         <div id="point-properties-3" class="collapse">
@@ -1013,10 +1013,7 @@ date: 2016-10-17
         </a>
         <p>Creates a rectangle that is a deep copy of src.</p>
         <div id="rect-constructors-3" class="collapse">
-            <pre class=" language-java"><code class=" language-java"><span class="token keyword">this</span><span class="token punctuation">.</span>left <span class="token operator">=</span> src<span class="token punctuation">.</span>left<span class="token punctuation">;</span>
-<span class="token keyword">this</span><span class="token punctuation">.</span>top <span class="token operator">=</span> src<span class="token punctuation">.</span>top<span class="token punctuation">;</span>
-<span class="token keyword">this</span><span class="token punctuation">.</span>right <span class="token operator">=</span> src<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
-<span class="token keyword">this</span><span class="token punctuation">.</span>bottom <span class="token operator">=</span> src<span class="token punctuation">.</span>bottom<span class="token punctuation">;</span></code></pre>
+            <pre class=" language-java"><code class=" language-java"><span class="token keyword">this</span><span class="token punctuation">(</span>src<span class="token punctuation">.</span>left<span class="token punctuation">,</span> src<span class="token punctuation">.</span>top<span class="token punctuation">,</span> src<span class="token punctuation">.</span>right<span class="token punctuation">,</span> src<span class="token punctuation">.</span>bottom<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
         </div>
     </td>
 </tr>
@@ -1073,10 +1070,23 @@ rect<span class="token punctuation">.</span><span class="token function">interse
 <tr>
     <td>
         <a href="#rect-static-factory-methods-3" data-toggle="collapse">
+            <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> Rect <span class="token function">fromLBRT</span><span class="token punctuation">(</span><span class="token keyword">float</span> left<span class="token punctuation">,</span> <span class="token keyword">float</span> bottom<span class="token punctuation">,</span> <span class="token keyword">float</span> right<span class="token punctuation">,</span> <span class="token keyword">float</span> top<span class="token punctuation">)</span></code>
+        </a>
+        <p>Creates a rect with the specified boundaries entered in LBRT order.</p>
+        <div id="rect-static-factory-methods-3" class="collapse">
+            <pre class=" language-java"><code class=" language-java"><span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Rect</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> top<span class="token punctuation">,</span> right<span class="token punctuation">,</span> bottom<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+        </div>
+    </td>
+</tr>
+
+
+<tr>
+    <td>
+        <a href="#rect-static-factory-methods-4" data-toggle="collapse">
             <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> Rect <span class="token function">fromUnion</span><span class="token punctuation">(</span>Point<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> points<span class="token punctuation">)</span></code>
         </a>
         <p>Finds the smallest rectangle that encloses all the specified points.</p>
-        <div id="rect-static-factory-methods-3" class="collapse">
+        <div id="rect-static-factory-methods-4" class="collapse">
             <pre class=" language-java"><code class=" language-java"><span class="token comment" spellcheck="true">//Create an empty rect</span>
 Rect rect <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Rect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//Enclose each of the points</span>
@@ -1090,11 +1100,11 @@ rect<span class="token punctuation">.</span><span class="token function">setUnio
 
 <tr>
     <td>
-        <a href="#rect-static-factory-methods-4" data-toggle="collapse">
+        <a href="#rect-static-factory-methods-5" data-toggle="collapse">
             <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> Rect <span class="token function">fromUnion</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">[</span><span class="token punctuation">]</span> points<span class="token punctuation">,</span> <span class="token keyword">int</span> offset<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">)</span></code>
         </a>
         <p>Finds the smallest rectangle that encloses a subset of points in the specified array.</p>
-        <div id="rect-static-factory-methods-4" class="collapse">
+        <div id="rect-static-factory-methods-5" class="collapse">
             <pre class=" language-java"><code class=" language-java"><span class="token comment" spellcheck="true">//Create an empty rect</span>
 Rect rect <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Rect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//Enclose the specified subset of points</span>
@@ -1108,11 +1118,11 @@ rect<span class="token punctuation">.</span><span class="token function">setUnio
 
 <tr>
     <td>
-        <a href="#rect-static-factory-methods-5" data-toggle="collapse">
+        <a href="#rect-static-factory-methods-6" data-toggle="collapse">
             <code class=" language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> Rect <span class="token function">fromUnion</span><span class="token punctuation">(</span>Rect r1<span class="token punctuation">,</span> Rect r2<span class="token punctuation">)</span></code>
         </a>
         <p>Finds the union of rectangles r1 and r2.</p>
-        <div id="rect-static-factory-methods-5" class="collapse">
+        <div id="rect-static-factory-methods-6" class="collapse">
             <pre class=" language-java"><code class=" language-java"><span class="token comment" spellcheck="true">//Copy the first rect</span>
 Rect rect <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Rect</span><span class="token punctuation">(</span>r1<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//Union it with the second rect</span>
@@ -3748,7 +3758,7 @@ canvas<span class="token punctuation">.</span><span class="token function">setTr
             </th>
         </tr>
     </thead>
-    <tbody id="-drag-detector-callbacks" class="collapse in">
+    <tbody id="-drag-detector-callbacks" class="collapse">
 
 <tr>
     <td>
@@ -3824,11 +3834,7 @@ canvas<span class="token punctuation">.</span><span class="token function">setTr
 
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onMove</span><span class="token punctuation">(</span><span class="token keyword">float</span> x<span class="token punctuation">,</span> <span class="token keyword">float</span> y<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">//Compute the rect from our start point to (x,y)</span>
-        <span class="token keyword">float</span> left <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>start<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
-        <span class="token keyword">float</span> bottom <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>start<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
-        <span class="token keyword">float</span> width <span class="token operator">=</span> x <span class="token operator">-</span> left<span class="token punctuation">;</span>
-        <span class="token keyword">float</span> height <span class="token operator">=</span> y <span class="token operator">-</span> bottom<span class="token punctuation">;</span>
-        Rect rect <span class="token operator">=</span> Rect<span class="token punctuation">.</span><span class="token function">fromDimensions</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> bottom<span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Rect rect <span class="token operator">=</span> Rect<span class="token punctuation">.</span><span class="token function">fromLBRT</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>start<span class="token punctuation">.</span>x<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>start<span class="token punctuation">.</span>y<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">//Fit shape inside the rect using the ScaleToFit.FILL option</span>
         shape<span class="token punctuation">.</span><span class="token function">fitInRect</span><span class="token punctuation">(</span>rect<span class="token punctuation">,</span> Matrix2D<span class="token punctuation">.</span>ScaleToFit<span class="token punctuation">.</span>Fill<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">//Clear the canvas and redraw the shape</span>
