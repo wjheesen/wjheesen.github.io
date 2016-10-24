@@ -20,6 +20,16 @@ canvas {
     padding-right: 15px;
 }
 
+table{
+  table-layout: fixed;
+}
+
+.legal{
+    margin-left:20px;
+    font-style: italic;
+}
+
+/*Matrix styles*/
 .matrix {
     position: relative;
 }
@@ -45,7 +55,7 @@ canvas {
     text-align: center;
 }
 
-
+/*Bootstrap Callouts*/
 .bs-callout {
     padding: 20px;
     margin: 20px 0;
@@ -101,9 +111,4 @@ canvas {
 }
 .bs-callout-info h4 {
     color: #5bc0de;
-}
-
-.legal{
-    margin-left:20px;
-    font-style: italic;
 }
