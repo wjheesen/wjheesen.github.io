@@ -41,7 +41,7 @@ canvas {
     border-left: 0px;
 }
 .matrix td {
-    padding: 5px;    
+    padding: 5px;
     text-align: center;
 }
 
@@ -106,4 +106,8 @@ canvas {
 .legal{
     margin-left:20px;
     font-style: italic;
+}
+
+pre {
+  overflow: scroll;
 }
