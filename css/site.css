@@ -2,7 +2,7 @@ body {
     margin-top: 30px;
     padding-top: 50px;
     padding-bottom: 20px;
-    background: url("images/tiny_grid.png") repeat;
+    background: url(../images/tiny_grid.png) repeat;
 }
 
 /* Wrapping element */
