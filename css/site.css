@@ -1,6 +1,20 @@
 body {
+    margin-top: 30px;
     padding-top: 50px;
     padding-bottom: 20px;
+    background: url(images/tiny_grid.png) repeat;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+}
+
+table{
+    table-layout: fixed;
 }
 
 canvas {
@@ -9,19 +23,8 @@ canvas {
     margin-bottom: 10px;
 }
 
-.form-group input[type=color]{
-    min-width: 50px;
-}
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-table{
-  table-layout: fixed;
+.row {
+    padding: 15px;
 }
 
 .legal{
@@ -29,7 +32,11 @@ table{
     font-style: italic;
 }
 
-/*Matrix styles*/
+.form-group input[type=color]{
+    min-width: 50px;
+}
+
+
 .matrix {
     position: relative;
 }
@@ -55,7 +62,7 @@ table{
     text-align: center;
 }
 
-/*Bootstrap Callouts*/
+
 .bs-callout {
     padding: 20px;
     margin: 20px 0;
