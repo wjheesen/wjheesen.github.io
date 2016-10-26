@@ -12,6 +12,11 @@ body {
   }
 }
 
+.container {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .content-block{
     margin: 30px 10px;
     padding: 10px 20px;
