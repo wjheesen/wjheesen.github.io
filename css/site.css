@@ -1,5 +1,6 @@
+
 body {
-    padding-top: 65px;
+    padding-top: 50px;
     background: url(../images/tiny_grid.png) repeat;
 }
 
@@ -11,14 +12,9 @@ body {
   }
 }
 
-.container{
-    padding: 10px;
-}
-
 .content-block{
-    margin-top: 30px;
-    margin-bottom: 30px;
-    padding: 15px;
+    margin: 30px 10px;
+    padding: 10px 20px;
     background-color: white; /**The fallback*/
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 15px 15px;
@@ -26,6 +22,7 @@ body {
     -moz-box-shadow:0 1px 6px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 0, 0, 0.1) inset;
     box-shadow:0 1px 6px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 0, 0, 0.1) inset;
 }
+
 
 canvas {
     border: 1px solid #000;
