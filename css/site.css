@@ -18,8 +18,7 @@ body {
 }
 
 .content-block{
-    margin: 30px 0px;
-    padding: 10px 20px;
+    margin: 30px 0;
     padding: 10px 20px;
     background-color: white; /**The fallback*/
     background-color: rgba(255, 255, 255, 0.7);
@@ -28,6 +27,7 @@ body {
     -moz-box-shadow:0 1px 6px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 0, 0, 0.1) inset;
     box-shadow:0 1px 6px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 0, 0, 0.1) inset;
 }
+
 
 canvas {
     border: 1px solid #000;
@@ -74,11 +74,11 @@ table {
 }
 .matrix:before {
     left: -6px;
-    border-right: 0px;
+    border-right: 0;
 }
 .matrix:after {
     right: -6px;
-    border-left: 0px;
+    border-left: 0;
 }
 .matrix td {
     padding: 5px;
