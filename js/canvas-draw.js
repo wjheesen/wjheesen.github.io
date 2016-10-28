@@ -4,6 +4,10 @@ $(document).ready(function () {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
 
+    if(!ctx){
+      $(document.body).css("background","red");
+    }
+
     //A function to fill the width of the screen
     function fillParentWidth() {
             canvas.style.width = '100%';

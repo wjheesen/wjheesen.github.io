@@ -1074,7 +1074,7 @@ class DragDetector {
             canvas.dispatchEvent(mouseEvent);
         }, false);
 
-        canvas.addEventListener("touchcancel", function (e) {
+        canvas.addEventListener("touchleave", function (e) {
             e.preventDefault();
             var touch = e.touches[0];
             var mouseEvent = new MouseEvent("mouseout", {
@@ -1084,7 +1084,7 @@ class DragDetector {
             canvas.dispatchEvent(mouseEvent);
         }, false);
 
-        // Prevent scrolling when touching the canvas
+        // Prevents scrolling when touching the canvas
         function preventScrolling(e) {
             if (e.target == canvas) {
                 e.preventDefault();
@@ -1094,7 +1094,7 @@ class DragDetector {
         document.body.addEventListener("touchstart", preventScrolling, false);
         document.body.addEventListener("touchmove", preventScrolling, false);
         document.body.addEventListener("touchend", preventScrolling, false);
-        document.body.addEventListener("touchcancel", preventScrolling, false);
+        document.body.addEventListener("touchleave", preventScrolling, false);
 
 
     }
