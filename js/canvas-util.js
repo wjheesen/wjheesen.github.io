@@ -1053,6 +1053,30 @@ class DragDetector {
             canvas.onmousemove = onPointerMove;
             canvas.onmouseup = onPointerUp;
             canvas.onmouseout = onPointerOut;
+
+            // Set up touch events for mobile, etc
+            $(canvas).on("touchstart", function (e) {
+                var touch = e.touches[0];
+                var mouseEvent = new MouseEvent("mousedown", {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas.dispatchEvent(mouseEvent);
+            });
+
+            $(canvas).on("touchend", function (e) {
+                var mouseEvent = new MouseEvent("mouseup", {});
+                canvas.dispatchEvent(mouseEvent);
+            });
+
+            $(canvas).on("touchmove", function (e) {
+                var touch = e.touches[0];
+                var mouseEvent = new MouseEvent("mousemove", {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas.dispatchEvent(mouseEvent);
+            });
         }
     }
 
