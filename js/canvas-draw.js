@@ -1,13 +1,26 @@
 $(document).ready(function () {
 
-  //Canvas variables
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
+    //Canvas variables
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
 
-  //If canvas not supported
-  if(!ctx){
-    $("body").css("background","red");
-  }
+    //A function to fill the width of the screen
+    function fillParentWidth() {
+            canvas.style.width = '100%';
+            canvas.width = canvas.offsetWidth;
+    }
+
+    //Apply the function
+    fillParentWidth();
+
+    //Resize canvas and redraw canvas whenever window is resized
+    window.onresize = function () {
+        fillParentWidth();
+        canvas.draw();
+    };
+
+    //Listen for mouse drag events
+    const surface = new DragDetector(canvas, onMouseDown, onMouseMove, onMouseUp, onMouseOut);
 
     //Draw Mode Enum
     const DrawMode = {
@@ -46,9 +59,6 @@ $(document).ready(function () {
     $("#pickStrokeColor").change(function () {
         strokeColor = $(this).val();
     });
-
-    //Mouse drag listener
-    const surface = new DragDetector(canvas, onMouseDown, onMouseMove, onMouseUp, onMouseOut, true);
 
     //Set initial text on canvas
     ctx.font = "16px sans-serif";

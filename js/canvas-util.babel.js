@@ -1232,41 +1232,9 @@ var Shape = function () {
     return Shape;
 }();
 
-var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut, fillWidth) {
+var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut) {
     _classCallCheck(this, DragDetector);
 
-    //Keep track of canvas offset
-    var offsetX = 0;
-    var offsetY = 0;
-
-    // A function to recalculate the canvas offsets
-    function reOffset() {
-        var BB = canvas.getBoundingClientRect();
-        offsetX = BB.left;
-        offsetY = BB.top;
-    }
-
-    //A function to fill the width of the screen
-    function fillParentWidth() {
-        canvas.style.width = '100%';
-        canvas.width = canvas.offsetWidth;
-    }
-
-    //Get initial offsets
-    reOffset();
-
-    // Listen for resize and scroll
-    window.onscroll = reOffset;
-    canvas.onresize = reOffset;
-    window.onresize = reOffset;
-    if (fillWidth) {
-        fillParentWidth();
-        window.onresize = function () {
-            fillParentWidth();
-            reOffset();
-            canvas.draw();
-        };
-    }
     // Listen for mouse drag events
     var isDragging = false;
 
@@ -1277,8 +1245,9 @@ var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut, fi
         // set the isDragging flag
         isDragging = true;
         // calculate the current mouse position
-        var pointerX = e.clientX - offsetX;
-        var pointerY = e.clientY - offsetY;
+        var BB = canvas.getBoundingClientRect();
+        var pointerX = e.clientX - BB.left;
+        var pointerY = e.clientY - BB.top;
         // send callback
         onDown(pointerX, pointerY);
     }
@@ -1292,8 +1261,9 @@ var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut, fi
         e.preventDefault();
         e.stopPropagation();
         // calculate the current mouse position
-        var pointerX = e.clientX - offsetX;
-        var pointerY = e.clientY - offsetY;
+        var BB = canvas.getBoundingClientRect();
+        var pointerX = e.clientX - BB.left;
+        var pointerY = e.clientY - BB.top;
         // send callback
         onDrag(pointerX, pointerY);
     }

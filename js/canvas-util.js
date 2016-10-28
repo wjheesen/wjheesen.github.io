@@ -985,40 +985,8 @@ class Shape {
 
 class DragDetector {
 
-    constructor(canvas, onDown, onDrag, onUp, onOut, fillWidth) {
+    constructor(canvas, onDown, onDrag, onUp, onOut) {
 
-        //Keep track of canvas offset
-        let offsetX = 0;
-        let offsetY = 0;
-
-        // A function to recalculate the canvas offsets
-        function reOffset() {
-            let BB = canvas.getBoundingClientRect();
-            offsetX = BB.left;
-            offsetY = BB.top;
-        }
-
-        //A function to fill the width of the screen
-        function fillParentWidth() {
-            canvas.style.width = '100%';
-            canvas.width = canvas.offsetWidth;
-        }
-
-        //Get initial offsets
-        reOffset();
-
-        // Listen for resize and scroll
-        window.onscroll = reOffset;
-        canvas.onresize = reOffset;
-        window.onresize = reOffset;
-        if (fillWidth) {
-            fillParentWidth();
-            window.onresize = function () {
-                fillParentWidth();
-                reOffset();
-                canvas.draw();
-            };
-        }
         // Listen for mouse drag events
         let isDragging = false;
 
@@ -1029,8 +997,9 @@ class DragDetector {
             // set the isDragging flag
             isDragging = true;
             // calculate the current mouse position
-            let pointerX = e.clientX - offsetX;
-            let pointerY = e.clientY - offsetY;
+            let BB = canvas.getBoundingClientRect();
+            let pointerX = e.clientX - BB.left;
+            let pointerY = e.clientY - BB.top;
             // send callback
             onDown(pointerX, pointerY);
         }
@@ -1042,8 +1011,9 @@ class DragDetector {
             e.preventDefault();
             e.stopPropagation();
             // calculate the current mouse position
-            let pointerX = e.clientX - offsetX;
-            let pointerY = e.clientY - offsetY;
+            let BB = canvas.getBoundingClientRect();
+            let pointerX = e.clientX - BB.left;
+            let pointerY = e.clientY - BB.top;
             // send callback
             onDrag(pointerX, pointerY);
         }
@@ -1072,7 +1042,6 @@ class DragDetector {
             onOut();
         }
 
-
         if (window.PointerEvent) {
             // Pointer events are supported.
             $(canvas).on("pointerdown", onPointerDown);
@@ -1085,8 +1054,6 @@ class DragDetector {
             canvas.onmouseup = onPointerUp;
             canvas.onmouseout = onPointerOut;
         }
-
-
     }
 
 
