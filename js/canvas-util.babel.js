@@ -1280,7 +1280,7 @@ var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut) {
         // The drag is over -- clear the isDragging flag
         isDragging = false;
         // Send callback
-        onUp(getMousePos(e));
+        onUp();
     }, false);
 
     canvas.addEventListener("mouseout", function (e) {
@@ -1294,7 +1294,7 @@ var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut) {
         // the drag is over -- clear the isDragging flag
         isDragging = false;
         // send callback
-        onOut(getMousePos(e));
+        onOut();
     }, false);
 
     // Convert touch events to mouse events
@@ -1321,20 +1321,14 @@ var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut) {
     canvas.addEventListener("touchend", function (e) {
         e.preventDefault();
         var touch = e.touches[0];
-        var mouseEvent = new MouseEvent("mouseup", {
-            clientX: touch.clientX,
-            clientY: touch.clientY
-        });
+        var mouseEvent = new MouseEvent("mouseup", {});
         canvas.dispatchEvent(mouseEvent);
     }, false);
 
     canvas.addEventListener("touchleave", function (e) {
         e.preventDefault();
         var touch = e.touches[0];
-        var mouseEvent = new MouseEvent("mouseout", {
-            clientX: touch.clientX,
-            clientY: touch.clientY
-        });
+        var mouseEvent = new MouseEvent("mouseout", {});
         canvas.dispatchEvent(mouseEvent);
     }, false);
 

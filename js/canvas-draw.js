@@ -4,10 +4,6 @@ $(document).ready(function () {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
 
-    if(!ctx){
-      $(document.body).css("background","red");
-    }
-
     //A function to fill the width of the screen
     function fillParentWidth() {
             canvas.style.width = '100%';
@@ -113,7 +109,7 @@ $(document).ready(function () {
         canvas.draw();
     }
 
-    function onMouseUp(mouse) {
+    function onMouseUp() {
         if (drawMode == DrawMode.FillRect) {
             //Remove selection box
             selectionBox.setEmpty();
@@ -124,8 +120,8 @@ $(document).ready(function () {
         canvas.draw();
     }
 
-    function onMouseOut(mouse) {
-        onMouseUp(mouse);
+    function onMouseOut() {
+        onMouseUp();
     }
 
     canvas.draw = function () {
