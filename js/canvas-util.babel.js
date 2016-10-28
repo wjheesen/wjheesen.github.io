@@ -1235,101 +1235,110 @@ var Shape = function () {
 var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut) {
     _classCallCheck(this, DragDetector);
 
-    // Listen for mouse drag events
+    // Listen for drag events
     var isDragging = false;
 
-    function onPointerDown(e) {
-        // tell the browser we're handling this event
-        e.preventDefault();
-        e.stopPropagation();
-        // set the isDragging flag
+    // Gets the position of the mouse relative to the canvas
+    function getMousePos(mouseEvent) {
+        var rect = canvas.getBoundingClientRect();
+        var x = mouseEvent.clientX - rect.left;
+        var y = mouseEvent.clientY - rect.top;
+        return new Point(x, y);
+    }
+
+    // Listen for mouse drag events
+    canvas.onmousedown = function (e) {
+        // The drag has begun -- set the isDragging flag
         isDragging = true;
-        // calculate the current mouse position
-        var BB = canvas.getBoundingClientRect();
-        var pointerX = e.clientX - BB.left;
-        var pointerY = e.clientY - BB.top;
-        // send callback
-        onDown(pointerX, pointerY);
-    }
+        // Send callback
+        onDown(getMousePos(e));
+    };
 
-    function onPointerMove(e) {
+    canvas.onmousemove = function (e) {
         // return if we're not dragging
         if (!isDragging) {
             return;
         }
-        // tell the browser we're handling this event
-        e.preventDefault();
-        e.stopPropagation();
-        // calculate the current mouse position
-        var BB = canvas.getBoundingClientRect();
-        var pointerX = e.clientX - BB.left;
-        var pointerY = e.clientY - BB.top;
         // send callback
-        onDrag(pointerX, pointerY);
-    }
+        onDrag(getMousePos(e));
+    };
 
-    function onPointerUp(e) {
+    canvas.onmouseup = function (e) {
         // return if we're not dragging
         if (!isDragging) {
             return;
         }
-        // tell the browser we're handling this event
-        e.preventDefault();
-        e.stopPropagation();
+        // The drag is over -- clear the isDragging flag
+        isDragging = false;
+        // Send callback
+        onUp(getMousePos(e));
+    };
+
+    canvas.onmouseout = function (e) {
+        // return if we're not dragging
+        if (!isDragging) {
+            return;
+        }
         // the drag is over -- clear the isDragging flag
         isDragging = false;
         // send callback
-        onUp();
-    }
+        onOut(getMousePos(e));
+    };
 
-    function onPointerOut(e) {
-        // return if we're not dragging
-        if (!isDragging) {
-            return;
+    // Handle touch events as mouse events
+    $(canvas).on("touchstart", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousedown", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    });
+
+    $(canvas).on("touchmove", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousemove", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    });
+
+    $(canvas).on("touchend", function (e) {
+        var mouseEvent = new MouseEvent("mouseup", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    });
+
+    $(canvas).on("touchcancel", function (e) {
+        var mouseEvent = new MouseEvent("mouseout", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    });
+
+    // Prevent scrolling when touching the canvas
+    document.body.addEventListener("touchstart", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
         }
-        // tell the browser we're handling this event
-        e.preventDefault();
-        e.stopPropagation();
-        // the drag is over -- clear the isDragging flag
-        isDragging = false;
-        // send callback
-        onOut();
-    }
-
-    if (window.PointerEvent) {
-        // Pointer events are supported.
-        $(canvas).on("pointerdown", onPointerDown);
-        $(canvas).on("pointermove", onPointerMove);
-        $(canvas).on("pointerup", onPointerUp);
-        $(canvas).on("pointerout", onPointerOut);
-    } else {
-        canvas.onmousedown = onPointerDown;
-        canvas.onmousemove = onPointerMove;
-        canvas.onmouseup = onPointerUp;
-        canvas.onmouseout = onPointerOut;
-
-        // Set up touch events for mobile, etc
-        $(canvas).on("touchstart", function (e) {
-            var touch = e.touches[0];
-            var mouseEvent = new MouseEvent("mousedown", {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            canvas.dispatchEvent(mouseEvent);
-        });
-
-        $(canvas).on("touchend", function (e) {
-            var mouseEvent = new MouseEvent("mouseup", {});
-            canvas.dispatchEvent(mouseEvent);
-        });
-
-        $(canvas).on("touchmove", function (e) {
-            var touch = e.touches[0];
-            var mouseEvent = new MouseEvent("mousemove", {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            canvas.dispatchEvent(mouseEvent);
-        });
-    }
+    }, false);
+    document.body.addEventListener("touchmove", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchend", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchcancel", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
 };

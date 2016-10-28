@@ -79,19 +79,16 @@ $(document).ready(function () {
     //Mouse tracking variable
     let start;
 
-    function onMouseDown(mouseX, mouseY) {
-        //Convert to point and save
-        start = new Point(mouseX, mouseY);
+    function onMouseDown(mouse) {
+        //Save reference to start point
+        start = mouse;
         //Init our shape
         shape = new Shape(mesh, fillColor);
-        //shape.points.data.fill(0);
         shape.lineWidth = lineWidth;
         shape.strokeColor = strokeColor;
     }
 
-    function onMouseMove(mouseX, mouseY) {
-        //Convert to point
-        let mouse = new Point(mouseX, mouseY);
+    function onMouseMove(mouse) {
 
         if (drawMode == DrawMode.FillRect) {
             //Calculate rect from start to mouse
@@ -112,7 +109,7 @@ $(document).ready(function () {
         canvas.draw();
     }
 
-    function onMouseUp() {
+    function onMouseUp(mouse) {
         if (drawMode == DrawMode.FillRect) {
             //Remove selection box
             selectionBox.setEmpty();
@@ -123,8 +120,8 @@ $(document).ready(function () {
         canvas.draw();
     }
 
-    function onMouseOut() {
-        onMouseUp();
+    function onMouseOut(mouse) {
+        onMouseUp(mouse);
     }
 
     canvas.draw = function () {
