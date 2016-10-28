@@ -1045,7 +1045,7 @@ class DragDetector {
 
         // Convert touch events to mouse events
         canvas.addEventListener("touchstart", function (e) {
-            $(document.body).css("background", "red");
+            e.preventDefault();
             var touch = e.touches[0];
             var mouseEvent = new MouseEvent("mousedown", {
                 clientX: touch.clientX,
@@ -1055,6 +1055,7 @@ class DragDetector {
         }, false);
 
         canvas.addEventListener("touchmove", function (e) {
+            e.preventDefault();
             var touch = e.touches[0];
             var mouseEvent = new MouseEvent("mousemove", {
                 clientX: touch.clientX,
@@ -1064,6 +1065,8 @@ class DragDetector {
         }, false);
 
         canvas.addEventListener("touchend", function (e) {
+            e.preventDefault();
+            var touch = e.touches[0];
             var mouseEvent = new MouseEvent("mouseup", {
                 clientX: touch.clientX,
                 clientY: touch.clientY
@@ -1072,6 +1075,8 @@ class DragDetector {
         }, false);
 
         canvas.addEventListener("touchcancel", function (e) {
+            e.preventDefault();
+            var touch = e.touches[0];
             var mouseEvent = new MouseEvent("mouseout", {
                 clientX: touch.clientX,
                 clientY: touch.clientY
