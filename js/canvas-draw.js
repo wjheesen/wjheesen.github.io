@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+  //Canvas variables
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  //If canvas not supported
+  if(!ctx){
+    $("body").css("background","red");
+  }
+
     //Draw Mode Enum
     const DrawMode = {
         FillRect: 0,
@@ -38,9 +47,6 @@ $(document).ready(function () {
         strokeColor = $(this).val();
     });
 
-    //Canvas variables
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
     //Mouse drag listener
     const surface = new DragDetector(canvas, onMouseDown, onMouseMove, onMouseUp, onMouseOut, true);
 

@@ -1,4 +1,4 @@
-1. Add logo
-2. Showcase apps on main page + link to recent blog posts.
+1. Add logo -- COMPLETE
+2. Showcase apps on main page + link to recent blog posts. -- COMPLETE
 3. Add an 'About' page
 4. Get HTML5 canvas working on mobile devices or replace with image.
