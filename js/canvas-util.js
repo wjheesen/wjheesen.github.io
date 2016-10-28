@@ -999,7 +999,7 @@ class DragDetector {
         }
 
         // Listen for mouse drag events
-        canvas.onmousedown = function (e) {
+        canvas.addEventListener("mousedown", function (e) {
             // The drag has begun -- set the isDragging flag
             isDragging = true;
             // tell the browser we're handling this event
@@ -1007,9 +1007,9 @@ class DragDetector {
             e.stopPropagation();
             // Send callback
             onDown(getMousePos(e));
-        }
+        }, false);
 
-        canvas.onmousemove = function(e) {
+        canvas.addEventListener("mousemove", function (e) {
             // return if we're not dragging
             if (!isDragging) { return; }
             // tell the browser we're handling this event
@@ -1017,9 +1017,9 @@ class DragDetector {
             e.stopPropagation();
             // send callback
             onDrag(getMousePos(e));
-        }
+        }, false);
 
-        canvas.onmouseup = function (e) {
+        canvas.addEventListener("mouseup", function (e) {
             // return if we're not dragging
             if (!isDragging) { return; }
             // tell the browser we're handling this event
@@ -1029,9 +1029,9 @@ class DragDetector {
             isDragging = false;
             // Send callback
             onUp(getMousePos(e));
-        }
+        }, false);
 
-        canvas.onmouseout = function(e) {
+        canvas.addEventListener("mouseout", function (e) {
             // return if we're not dragging
             if (!isDragging) { return; }
             // tell the browser we're handling this event
@@ -1041,7 +1041,7 @@ class DragDetector {
             isDragging = false;
             // send callback
             onOut(getMousePos(e));
-        }
+        }, false);
 
         // Convert touch events to mouse events
         canvas.addEventListener("touchstart", function (e) {
