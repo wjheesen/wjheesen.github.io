@@ -1002,6 +1002,9 @@ class DragDetector {
         canvas.onmousedown = function (e) {
             // The drag has begun -- set the isDragging flag
             isDragging = true;
+            // tell the browser we're handling this event
+            e.preventDefault();
+            e.stopPropagation();
             // Send callback
             onDown(getMousePos(e));
         }
@@ -1009,6 +1012,9 @@ class DragDetector {
         canvas.onmousemove = function(e) {
             // return if we're not dragging
             if (!isDragging) { return; }
+            // tell the browser we're handling this event
+            e.preventDefault();
+            e.stopPropagation();
             // send callback
             onDrag(getMousePos(e));
         }
@@ -1016,6 +1022,9 @@ class DragDetector {
         canvas.onmouseup = function (e) {
             // return if we're not dragging
             if (!isDragging) { return; }
+            // tell the browser we're handling this event
+            e.preventDefault();
+            e.stopPropagation();
             // The drag is over -- clear the isDragging flag
             isDragging = false;
             // Send callback
@@ -1025,68 +1034,62 @@ class DragDetector {
         canvas.onmouseout = function(e) {
             // return if we're not dragging
             if (!isDragging) { return; }
+            // tell the browser we're handling this event
+            e.preventDefault();
+            e.stopPropagation();
             // the drag is over -- clear the isDragging flag
             isDragging = false;
             // send callback
             onOut(getMousePos(e));
         }
 
-        // Handle touch events as mouse events
-        $(canvas).on("touchstart", function (e) {
+        // Convert touch events to mouse events
+        canvas.addEventListener("touchstart", function (e) {
+            $(document.body).css("background", "red");
             var touch = e.touches[0];
             var mouseEvent = new MouseEvent("mousedown", {
                 clientX: touch.clientX,
                 clientY: touch.clientY
             });
             canvas.dispatchEvent(mouseEvent);
-        });
+        }, false);
 
-        $(canvas).on("touchmove", function (e) {
+        canvas.addEventListener("touchmove", function (e) {
             var touch = e.touches[0];
             var mouseEvent = new MouseEvent("mousemove", {
                 clientX: touch.clientX,
                 clientY: touch.clientY
             });
             canvas.dispatchEvent(mouseEvent);
-        });
+        }, false);
 
-        $(canvas).on("touchend", function (e) {
+        canvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {
                 clientX: touch.clientX,
                 clientY: touch.clientY
             });
             canvas.dispatchEvent(mouseEvent);
-        });
+        }, false);
 
-        $(canvas).on("touchcancel", function (e) {
+        canvas.addEventListener("touchcancel", function (e) {
             var mouseEvent = new MouseEvent("mouseout", {
                 clientX: touch.clientX,
                 clientY: touch.clientY
             });
             canvas.dispatchEvent(mouseEvent);
-        });
+        }, false);
 
         // Prevent scrolling when touching the canvas
-        document.body.addEventListener("touchstart", function (e) {
+        function preventScrolling(e) {
             if (e.target == canvas) {
                 e.preventDefault();
             }
-        }, false);
-        document.body.addEventListener("touchmove", function (e) {
-            if (e.target == canvas) {
-                e.preventDefault();
-            }
-        }, false);
-        document.body.addEventListener("touchend", function (e) {
-            if (e.target == canvas) {
-                e.preventDefault();
-            }
-        }, false);
-        document.body.addEventListener("touchcancel", function (e) {
-            if (e.target == canvas) {
-                e.preventDefault();
-            }
-        }, false);
+        }
+
+        document.body.addEventListener("touchstart", preventScrolling, false);
+        document.body.addEventListener("touchmove", preventScrolling, false);
+        document.body.addEventListener("touchend", preventScrolling, false);
+        document.body.addEventListener("touchcancel", preventScrolling, false);
 
 
     }
