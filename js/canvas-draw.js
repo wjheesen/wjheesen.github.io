@@ -3,7 +3,7 @@ $(document).ready(function () {
      $(document.body).css("background", "blue");
 
     //Canvas variables
-    const canvas = $("#canvas");
+    const canvas = $("#canvas")[0];
     const ctx = canvas.getContext("2d");
 
     //A function to fill the width of the screen
