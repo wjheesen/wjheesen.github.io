@@ -1,7 +1,5 @@
 $(document).on("pagecreate", function (event, ui) {
 
-     $(document.body).css("background", "blue");
-
     //Canvas variables
     const canvas = $("#canvas")[0];
     const ctx = canvas.getContext("2d");
