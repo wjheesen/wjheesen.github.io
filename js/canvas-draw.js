@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+     $(document.body).css("background", "blue");
+
     //Canvas variables
     const canvas = $("#canvas");
     const ctx = canvas.getContext("2d");
