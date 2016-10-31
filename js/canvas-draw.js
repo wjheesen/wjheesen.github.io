@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).on("pagecreate", function (event, ui) {
 
     //Canvas variables
     const canvas = $("#canvas")[0];
