@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     //Canvas variables
-    const canvas = document.getElementById("canvas");
+    const canvas = $("#canvas");
     const ctx = canvas.getContext("2d");
 
     //A function to fill the width of the screen
