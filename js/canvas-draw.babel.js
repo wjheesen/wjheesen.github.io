@@ -6,23 +6,23 @@ $(function () {
     var canvas = $("#canvas")[0];
     var ctx = canvas.getContext("2d");
 
-    // //A function to fill the width of the screen
-    // function fillParentWidth() {
-    //     canvas.style.width = '100%';
-    //     canvas.width = canvas.offsetWidth;
-    // }
-    //
-    // //Resize canvas and redraw canvas whenever window is resized
-    // window.onresize = function () {
-    //     fillParentWidth();
-    //     canvas.draw();
-    // };
-    //
-    // //Resize canvas to parent width
-    // fillParentWidth();
+    //A function to fill the width of the screen
+    function fillParentWidth() {
+        canvas.style.width = '100%';
+        canvas.width = canvas.offsetWidth;
+    }
+
+    //Apply the function
+    fillParentWidth();
 
     //Add 1 pixel border
     $(canvas).css("border","1px solid #000");
+
+    //Resize canvas and redraw canvas whenever window is resized
+    window.onresize = function () {
+        fillParentWidth();
+        canvas.draw();
+    };
 
     //Listen for mouse drag events
     var surface = new DragDetector(canvas, onMouseDown, onMouseMove, onMouseUp, onMouseOut);
@@ -130,7 +130,7 @@ $(function () {
 
     canvas.draw = function () {
         // clear the canvas
-        ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         // redraw all shapes in their current positions
         if (drawMode == DrawMode.FillRect) {
             selectionBox.draw(ctx);

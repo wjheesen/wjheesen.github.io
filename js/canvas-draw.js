@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function () {
 
     //Canvas variables
     const canvas = $("#canvas")[0];
@@ -129,7 +129,7 @@ $(function () {
 
     canvas.draw = function () {
         // clear the canvas
-        ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         // redraw all shapes in their current positions
         if (drawMode == DrawMode.FillRect) {
             selectionBox.draw(ctx);
