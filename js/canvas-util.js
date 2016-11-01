@@ -1085,8 +1085,8 @@ class DragDetector {
         // Gets the position of the touch relative to the canvas
         function getTouchPos(touchEvent) {
             let rect = canvas.getBoundingClientRect();
-            let x = touchEvent.touches[0].clientX - rect.left;
-            let y = touchEvent.touches[0].clientY - rect.top;
+            let x = touchEvent.touches[0].pageX - rect.left;
+            let y = touchEvent.touches[0].pageY - rect.top;
             return new Point(x, y);
         }
 
