@@ -12,17 +12,17 @@ $(function () {
         canvas.width = canvas.offsetWidth;
     }
 
-    //Apply the function
-    fillParentWidth();
-
-    //Add 1 pixel border
-    $(canvas).css("border","1px solid #000");
-
     //Resize canvas and redraw canvas whenever window is resized
     window.onresize = function () {
         fillParentWidth();
         canvas.draw();
     };
+
+    //Resize canvas to parent width
+    fillParentWidth();
+
+    //Add 1 pixel border
+    $(canvas).css("border","1px solid #000");
 
     //Listen for mouse drag events
     var surface = new DragDetector(canvas, onMouseDown, onMouseMove, onMouseUp, onMouseOut);
