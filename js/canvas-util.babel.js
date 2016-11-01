@@ -1287,23 +1287,45 @@ var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut) {
     }, false);
 
     // Gets the position of the mouse relative to the canvas
-    function getMousePos(mouseEvent) {
-        var x = void 0,
-            y = void 0;
+    function getMousePos(e) {
+        var offsetX = 0,
+            offsetY = 0;
 
-        if (mouseEvent.offsetX) {
-            x = mouseEvent.offsetX;
-            y = mouseEvent.offsetY;
-        } else if (mouseEvent.layerX) {
-            x = mouseEvent.layerX;
-            y = mouseEvent.layerY;
-        } else {
-            var rect = canvas.getBoundingClientRect();
-            x = mouseEvent.clientX - rect.left;
-            y = mouseEvent.clientY - rect.top;
+        // Compute the total offset. It's possible to cache this if you want
+        if (canvas.offsetParent !== undefined) {
+            do {
+                offsetX += canvas.offsetLeft;
+                offsetY += canvas.offsetTop;
+            } while (canvas = canvas.offsetParent);
         }
 
-        return new Point(x, y);
+        // Add padding and border style widths to offset
+        // Also add the <html> offsets in case there's a position:fixed bar (like the stumbleupon bar)
+        // This part is not strictly necessary, it depends on your styling
+        offsetX += stylePaddingLeft + styleBorderLeft + htmlLeft;
+        offsetY += stylePaddingTop + styleBorderTop + htmlTop;
+
+        var mx = e.pageX - offsetX;
+        var my = e.pageY - offsetY;
+
+        // We return a simple javascript object with x and y defined
+        return new Point(mx, my);
+
+        //let x, y;
+
+        //if (mouseEvent.offsetX) {
+        //    x = mouseEvent.offsetX;
+        //    y = mouseEvent.offsetY;
+        //} else if (mouseEvent.layerX) {
+        //    x = mouseEvent.layerX;
+        //    y = mouseEvent.layerY;
+        //} else {
+        //    let rect = canvas.getBoundingClientRect();
+        //    x = mouseEvent.clientX - rect.left;
+        //    y = mouseEvent.clientY - rect.top;
+        //}
+
+        //return new Point(x, y);
     }
 
     // Listen for touch events

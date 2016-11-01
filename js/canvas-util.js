@@ -1033,23 +1033,45 @@ class DragDetector {
         }, false);
 
         // Gets the position of the mouse relative to the canvas
-        function getMousePos(mouseEvent) {
-            let x, y;
+            function getMousePos(e) {
+                let offsetX = 0, offsetY = 0;
 
-            if (mouseEvent.offsetX) {
-                x = mouseEvent.offsetX;
-                y = mouseEvent.offsetY;
-            } else if (mouseEvent.layerX) {
-                x = mouseEvent.layerX;
-                y = mouseEvent.layerY;
-            } else {
-                let rect = canvas.getBoundingClientRect();
-                x = mouseEvent.clientX - rect.left;
-                y = mouseEvent.clientY - rect.top;
+                // Compute the total offset. It's possible to cache this if you want
+                if (canvas.offsetParent !== undefined) {
+                    do {
+                        offsetX += canvas.offsetLeft;
+                        offsetY += canvas.offsetTop;
+                    } while ((canvas = canvas.offsetParent));
+                }
+
+                // Add padding and border style widths to offset
+                // Also add the <html> offsets in case there's a position:fixed bar (like the stumbleupon bar)
+                // This part is not strictly necessary, it depends on your styling
+                offsetX += stylePaddingLeft + styleBorderLeft + htmlLeft;
+                offsetY += stylePaddingTop + styleBorderTop + htmlTop;
+
+                let mx = e.pageX - offsetX;
+                let my = e.pageY - offsetY;
+
+                // We return a simple javascript object with x and y defined
+                return new Point(mx, my);
+
+                //let x, y;
+
+                //if (mouseEvent.offsetX) {
+                //    x = mouseEvent.offsetX;
+                //    y = mouseEvent.offsetY;
+                //} else if (mouseEvent.layerX) {
+                //    x = mouseEvent.layerX;
+                //    y = mouseEvent.layerY;
+                //} else {
+                //    let rect = canvas.getBoundingClientRect();
+                //    x = mouseEvent.clientX - rect.left;
+                //    y = mouseEvent.clientY - rect.top;
+                //}
+
+                //return new Point(x, y);
             }
-
-            return new Point(x, y);
-        }
 
         // Listen for touch events
         canvas.addEventListener("touchstart", function (e) {
