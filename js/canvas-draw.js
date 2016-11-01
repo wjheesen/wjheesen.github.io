@@ -13,6 +13,9 @@ $(document).ready(function () {
     //Apply the function
     fillParentWidth();
 
+    //Add 1 pixel border
+    $(canvas).css("border","1px solid #000");
+
     //Resize canvas and redraw canvas whenever window is resized
     window.onresize = function () {
         fillParentWidth();

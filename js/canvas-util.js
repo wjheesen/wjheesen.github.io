@@ -1090,19 +1090,6 @@ class DragDetector {
             return new Point(x, y);
         }
 
-        // Prevent scrolling on canvas
-        document.body.addEventListener("touchstart", preventScrolling, false);
-        document.body.addEventListener("touchmove", preventScrolling, false);
-        document.body.addEventListener("touchend", preventScrolling, false);
-        document.body.addEventListener("touchleave", preventScrolling, false);
-
-        // Prevents scrolling when touching the canvas
-        function preventScrolling(e) {
-            if (e.target == canvas) {
-                e.preventDefault();
-            }
-        }
-
     }
 
 
