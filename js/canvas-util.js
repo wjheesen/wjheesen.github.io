@@ -1034,9 +1034,20 @@ class DragDetector {
 
         // Gets the position of the mouse relative to the canvas
         function getMousePos(mouseEvent) {
-            let rect = canvas.getBoundingClientRect();
-            let x = mouseEvent.clientX - rect.left;
-            let y = mouseEvent.clientY - rect.top;
+            let x, y;
+
+            if (mouseEvent.offsetX) {
+                x = mouseEvent.offsetX;
+                y = mouseEvent.offsetY;
+            } else if (mouseEvent.layerX) {
+                x = mouseEvent.layerX;
+                y = mouseEvent.layerY;
+            } else {
+                let rect = canvas.getBoundingClientRect();
+                x = mouseEvent.clientX - rect.left;
+                y = mouseEvent.clientY - rect.top;
+            }
+
             return new Point(x, y);
         }
 
@@ -1084,10 +1095,7 @@ class DragDetector {
 
         // Gets the position of the touch relative to the canvas
         function getTouchPos(touchEvent) {
-            let rect = canvas.getBoundingClientRect();
-            let x = touchEvent.touches[0].clientX - rect.left;
-            let y = touchEvent.touches[0].clientY - rect.top;
-            return new Point(x, y);
+            return getMousePos(touchEvent.touches[0]);
         }
 
     }

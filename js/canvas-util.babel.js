@@ -1288,9 +1288,21 @@ var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut) {
 
     // Gets the position of the mouse relative to the canvas
     function getMousePos(mouseEvent) {
-        var rect = canvas.getBoundingClientRect();
-        var x = mouseEvent.clientX - rect.left;
-        var y = mouseEvent.clientY - rect.top;
+        var x = void 0,
+            y = void 0;
+
+        if (mouseEvent.offsetX) {
+            x = mouseEvent.offsetX;
+            y = mouseEvent.offsetY;
+        } else if (mouseEvent.layerX) {
+            x = mouseEvent.layerX;
+            y = mouseEvent.layerY;
+        } else {
+            var rect = canvas.getBoundingClientRect();
+            x = mouseEvent.clientX - rect.left;
+            y = mouseEvent.clientY - rect.top;
+        }
+
         return new Point(x, y);
     }
 
@@ -1344,10 +1356,6 @@ var DragDetector = function DragDetector(canvas, onDown, onDrag, onUp, onOut) {
 
     // Gets the position of the touch relative to the canvas
     function getTouchPos(touchEvent) {
-        var rect = canvas.getBoundingClientRect();
-        var x = touchEvent.touches[0].clientX - rect.left;
-        var y = touchEvent.touches[0].clientY - rect.top;
-        return new Point(x, y);
+        return getMousePos(touchEvent.touches[0]);
     }
-
 };
