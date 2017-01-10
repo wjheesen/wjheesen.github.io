@@ -1,0 +1,107 @@
+---
+layout: fullscreen
+title: Hexel Art
+date: 2017-01-09
+---
+
+<style>
+    * { margin:0; padding:0; } /* to remove the top and left whitespace */
+
+    canvas{
+      margin: 0;
+    }
+
+    /* make the canvas the size of the viewport */
+    #c{
+        width: 100vw;
+        height: 95vh;
+        display: block;
+        border: none;
+    }
+
+    #cout{
+        display: none;
+    }
+</style>
+
+<!-- <p>See below for prototype. It's just like pixel art, but with hexagons.</p> -->
+
+<form class="form-inline">
+   <div class="form-group">
+       <label for="tool-picker" class="control-label">
+           Tool:
+       </label>
+       <select class="form-control" id="tool-picker">
+           <option value="0">Brush</option>
+           <option value="1">Eraser</option>
+           <option value="2">Paint Bucket</option>
+           <option value="3">Eyedropper</option>
+           <option value="4">Line Tool</option>
+           <option value="5">Rectangle Tool</option>
+           <option value="6">Shape Tool</option>
+       </select>
+   </div>
+   <div class="form-group">
+       <label for="brush-size-picker" class="control-label">
+           Brush size:
+       </label>
+       <input class="form-control" type="number" id="brush-size-picker" value="1" min="1" max="25">
+   </div>
+   <div class="form-group">
+       <label for="shape-picker" class="control-label">
+           Shape:
+       </label>
+       <select class="form-control" id="shape-picker">
+           <option value="0">Triangle</option>
+           <option value="1">Diamond</option>
+           <option value="2">Pentagon</option>
+           <option value="3">Hexagon</option>
+           <option value="4">Circle</option>
+           <option value="5">Star</option>
+           <option value="6">Heart</option>
+           <option value="7">Flower</option>
+           <option value="8">Bat</option>
+       </select>
+   </div>
+   <div class="form-group">
+       <label for="color-picker" class="control-label">
+           Color:
+       </label>
+       <input class="form-control" id="color-picker" type="color" value="#000000">
+   </div>
+   <div class="form-group">
+       <label for="image-picker" class="control-label">
+           Image:
+       </label>
+       <input class="form-control" id="image-picker" type="file">
+   </div>
+   <a id="download" role="button">Download</a>
+   <canvas id="cout" width="100" height="100"></canvas>
+</form>
+
+
+<canvas id="c" width="800" height="600"></canvas>
+
+<script id="vs" type="notjs">
+   uniform mat4    u_MVP;
+   attribute vec4  a_position;
+   attribute vec4  a_color;
+   varying vec4    v_color;
+
+   void main() {
+       gl_Position = u_MVP * a_position;
+       v_color = a_color;
+   }
+</script>
+
+<script id="fs" type="notjs">
+   precision mediump float;
+   varying vec4  v_color;
+
+   void main() {
+       gl_FragColor = v_color;
+   }
+</script>
+
+<script src="/packages/twgl/twgl-full.min.js"></script>
+<script src="/js/hexel-art.min.js"></script>
