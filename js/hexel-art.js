@@ -2637,7 +2637,13 @@ var Renderer = function () {
         key: 'onDrawFrame',
         value: function onDrawFrame() {
             this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-            twgl.drawBufferInfo(this.gl, this.bufferInfo);
+          
+            if(this.bufferInfo.indices){
+                twgl.drawBufferInfo(this.gl, this.bufferInfo);
+            } else {
+                console.log(this.bufferInfo);
+            }
+
         }
     }, {
         key: 'applyColorChanges',
