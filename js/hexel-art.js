@@ -2397,6 +2397,8 @@ exports.Surface = Surface;
 
 
 
+$(function () {
+
 var ghx = exports;
 
 const cout = document.getElementById("cout");
@@ -2849,4 +2851,7 @@ $("#image-picker").change(function (e) {
         img.src = event.target.result;
     }
     reader.readAsDataURL(e.target.files[0]);
+});
+
+
 });

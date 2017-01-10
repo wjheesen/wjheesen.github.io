@@ -29,12 +29,7 @@ body {
 }
 
 
-canvas {
-    position: relative;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #000;
-}
+
 
 table {
     table-layout: fixed;
