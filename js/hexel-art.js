@@ -2637,8 +2637,8 @@ var Renderer = function () {
         key: 'onDrawFrame',
         value: function onDrawFrame() {
             this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-          
-            if(this.bufferInfo.indices){
+
+            if(this.bufferInfo){
                 twgl.drawBufferInfo(this.gl, this.bufferInfo);
             } else {
                 console.log(this.bufferInfo);
