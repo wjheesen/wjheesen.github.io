@@ -10,8 +10,7 @@
 	<link href="bundle.min.css">
 
   <!-- Scripts -->
-  <link href="/packages/analytics.js">
-  <link href="bundle.min.js">
+  <script src="/packages/analytics.js"></script>
 
 </head>
 <body>
@@ -86,4 +85,162 @@
     <canvas id="offscreen-canvas"></canvas>
     <canvas id="onscreen-canvas"></canvas>
 </div>
+
+
+<script id="vs-hexel" type="notjs">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    // Used to compute gl_Position
+    uniform mat4        u_MVP;
+    attribute vec2      a_position;
+
+    // Used to compute v_color
+    uniform sampler2D   u_tex;
+    uniform vec2        u_baseTexCoord;
+    attribute vec2      a_texCoord;
+    attribute float     a_gradient;
+    varying vec4        v_color;
+
+    void main() {
+    gl_Position = u_MVP * vec4(a_position, 1.0, 1.0);
+    v_color = texture2D(u_tex, u_baseTexCoord + a_texCoord);
+    v_color.r += a_gradient;
+    v_color.g += a_gradient;
+    v_color.b += a_gradient;
+    v_color.a  = 1.0;
+    }
+</script>
+
+<script id="fs-hexel" type="notjs">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    varying vec4 v_color;
+
+    void main() {
+    gl_FragColor = v_color;
+    }
+</script>
+
+<script id="vs-poly" type="notjs">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    uniform mat4    u_MVP;
+    uniform mat3    u_shapeMatrix;
+    attribute vec2  a_position;
+
+    void main() {
+    vec3 shapePosition = u_shapeMatrix * vec3(a_position,1.0);
+    gl_Position = u_MVP * vec4(shapePosition,1.0);
+    }
+</script>
+
+<script id="fs-poly" type="notjs">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    uniform vec4 u_color;
+
+    void main() {
+    gl_FragColor = u_color;
+    }
+</script>
+
+<script id="vs-ellipse" type="notjs">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    uniform mat4    u_MVP;
+    uniform vec4    u_rect;     // left, bottom, width, height
+    attribute vec2  a_texCoord; // (0,1),(0,0),(1,0),(1,1)
+    varying vec2    v_texCoord; // interpolated from a_texCoord
+
+    void main() {
+    float vx = u_rect[2] * a_texCoord.x + u_rect[0]; // width*x + left
+    float vy = u_rect[3] * a_texCoord.y + u_rect[1]; // height*y + bottom
+    gl_Position = u_MVP * vec4(vx, vy, 1.0, 1.0);
+    v_texCoord = a_texCoord * 2.0 - 1.0; // Map to (-1, 1)
+    }
+</script>
+
+<script id="fs-ellipse" type="notjs">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    uniform vec4 u_color;
+    varying vec2 v_texCoord;
+
+    void main() {
+    // Compute distance squared from tex coord to center of fragment
+    float dist2 = pow(v_texCoord.x, 2.0) + pow(v_texCoord.y, 2.0);
+    // This pixel is in the ellipse if dist2 <= 1.0,
+    float isInEllipse = float(dist2 <= 1.0);
+    // Next line keeps color if isInEllipse = 1 (true),
+    // and makes it transparent if isInEllipse = 0 (false)
+    gl_FragColor = u_color * isInEllipse;
+    }
+</script>
+
+<script id="vs-line" type="notjs">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    uniform mat4    u_MVP;       // Model View Projection matrix
+    uniform vec4    u_line;      // x1, y1, x2, y2 -> (start, end) of line segment
+    uniform float   u_thickness; // thickness of line segment
+    attribute vec2  a_position;  // static (0,0.5),(0,-0.5),(1,-0.5),(1,0.5)
+
+    void main() {
+    // 1. Let p1 = (x1,y1), p2 = (x2,y2)
+    vec2 p1 = vec2(u_line[0], u_line[1]);
+    vec2 p2 = vec2(u_line[2], u_line[3]);
+
+    // 2. Scale the square {left: 0, right: 1, bottom: -0.5, top: 0.5}
+    // to a rectangle with width=dist(p1,p2), and height = u_thickness.
+    float width = distance(p1, p2);
+    float height = u_thickness;
+    float sx = width * a_position.x;
+    float sy = height * a_position.y;
+
+    // 3. Rotate the rectangle by the angle formed by p2, p1, and (x1+e, y1) for any e>0.
+    float hypotenuse = width;
+    float adjacent = p2.x - p1.x;
+    float opposite = p2.y - p1.y;
+    float sin = opposite / hypotenuse;
+    float cos = adjacent / hypotenuse;
+    float rx = cos * sx - sin * sy;
+    float ry = sin * sx + cos * sy;
+
+    // 4. Translate rectangle to p1
+    float tx = rx + p1.x;
+    float ty = ry + p1.y;
+
+    // 5. Apply MVP matrix and we are done.
+    gl_Position = u_MVP * vec4(tx, ty, 1.0, 1.0);
+    }
+</script>
+
+<script id="fs-line" type="notjs">
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    uniform vec4 u_color;
+
+    void main() {
+    gl_FragColor = u_color;
+    }
+</script>
+
+<script src="bundle.min.js"></script>
+
 </body>
