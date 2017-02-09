@@ -1,0 +1,89 @@
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Hexel Art">
+	<meta name="author" content="William Heesen">
+
+	<title>Hexel Art</title>
+
+	<!-- styles -->
+	<link href="bundle.min.css">
+
+  <!-- Scripts -->
+  {% include analytics.html %}
+  <link href="bundle.min.js">
+
+</head>
+<body>
+<div id="toolbar">
+    <input id="color-picker" type="text" style="display:none" />
+    <div class="btn-group">
+        <button id="brush" class="btn btn-default btn-sm" aria-text="Brush">
+            <i class="icon-brush md-dark md-active md-18"></i>
+        </button>
+        <button id="line" class="btn btn-default btn-sm" aria-text="Line">
+            <i class="icon-line md-dark md-inactive md-18"></i>
+        </button>
+        <button id="color-sampler" class="btn btn-default btn-sm" aria-text="Color sampler">
+            <i class="icon-eyedropper md-dark md-inactive md-18"></i>
+        </button>
+        <button id="paint-bucket" class="btn btn-default btn-sm" aria-text="Paint bucket">
+            <i class="icon-bucket md-dark md-inactive md-18"></i>
+        </button>
+        <div class="btn-group" data-toggle="buttons">
+            <button id="shape" class="btn btn-default btn-sm" aria-text="Shape" data-toggle="dropdown">
+                <i class="icon-circle md-dark md-inactive md-18"></i><span class="caret md-dark md-inactive"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                      <a id="circle" role="button" style="display:inline-block">
+                          <i class="icon-circle md-dark md-18"></i>
+                      </a>
+                      <a id="triangle" role="button" style="display:inline-block">
+                          <i class="icon-triangle md-dark md-18"></i>
+                      </a>
+                      <a id="square" role="button" style="display:inline-block">
+                          <i class="icon-square md-dark md-18"></i>
+                      </a>
+                      <a id="diamond" role="button" style="display:inline-block">
+                          <i class="icon-diamond md-dark md-18"></i>
+                      </a>
+                      <a id="pentagon" role="button" style="display:inline-block">
+                          <i class="icon-pentagon md-dark md-18"></i>
+                      </a>
+                      <a id="hexagon" role="button" style="display:inline-block">
+                          <i class="icon-hexagon md-dark md-18"></i>
+                      </a>
+                      <a id="star" role="button" style="display:inline-block">
+                          <i class="icon-star md-dark md-18"></i>
+                      </a>
+                      <a id="heart" role="button" style="display:inline-block">
+                          <i class="icon-heart md-dark md-18"></i>
+                      </a>
+                      <a id="flower" role="button" style="display:inline-block">
+                          <i class="icon-flower md-dark md-18"></i>
+                      </a>
+                      <a id="bat" role="button" style="display:inline-block">
+                          <i class="icon-bat md-dark md-18"></i>
+                      </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="btn-group">
+        <button id="upload" class="btn btn-default btn-sm" type="button" aria-label="Upload image">
+            <i class="icon-picture md-dark md-18"></i>
+        </button>
+        <button id="download" class="btn btn-default btn-sm" type="button" aria-label="Download as image">
+            <i class="icon-download md-dark md-18"></i>
+        </button>
+        <button id="options" class="btn btn-default btn-sm" type="button" aria-label="Options">
+            <i class="icon-cog md-dark md-18"></i>
+        </button>
+    </div>
+</div>
+<div id="canvas-container">
+    <canvas id="offscreen-canvas"></canvas>
+    <canvas id="onscreen-canvas"></canvas>
+</div>
+</body>
