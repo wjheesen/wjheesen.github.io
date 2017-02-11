@@ -178,7 +178,7 @@
     float vx = u_rect[2] * a_texCoord.x + u_rect[0]; // width*x + left
     float vy = u_rect[3] * a_texCoord.y + u_rect[1]; // height*y + bottom
     gl_Position = u_MVP * vec4(vx, vy, 1.0, 1.0);
-    v_texCoord = a_texCoord * 2.0 - 1.0; // Map to (-1, 1)
+    v_texCoord = (a_texCoord * 2.0) - vec2(1.0, 1.0); // Map to (-1, 1)
     }
 </script>
 
