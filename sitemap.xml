@@ -9,10 +9,15 @@
     {% endfor %}
 
     {% for page in site.pages %}
+    {% if page.layout != nil %}
     {% if page.layout != 'feed' %}
     <url>
         <loc>http://wjheesen.github.io{{ page.url | remove: 'index.html' }}</loc>
     </url>
-    {% endif %}
-    {% endfor %}
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+  <url>
+    <loc>http://wjheesen.github.io/hexelart</loc>
+  </url>
 </urlset>
