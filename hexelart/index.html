@@ -7,7 +7,7 @@
 	<meta name="description" content="Hexel Art">
 	<meta name="author" content="William Heesen">
 
-	<title>Hexel Art v0.1</title>
+	<title>Hexel Art v0.2</title>
 
 	<!-- styles -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -33,243 +33,131 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-<div id="toolbar">
-    <input id="color-picker" type="text" style="display:none" />
-    <div class="btn-group">
-        <button id="brush" class="btn btn-default btn-sm" aria-text="Brush">
-            <i class="icon-brush md-dark md-active md-18"></i>
-        </button>
-        <button id="line" class="btn btn-default btn-sm" aria-text="Line tool">
-            <i class="icon-line md-dark md-inactive md-18"></i>
-        </button>
-        <button id="color-sampler" class="btn btn-default btn-sm" aria-text="Color sampler">
-            <i class="icon-eyedropper md-dark md-inactive md-18"></i>
-        </button>
-        <button id="paint-bucket" class="btn btn-default btn-sm" aria-text="Paint bucket">
-            <i class="icon-bucket md-dark md-inactive md-18"></i>
-        </button>
-        <button id="pan-tool" class="btn btn-default btn-sm" aria-text="Panning tool">
-            <i class="icon-pan_tool md-dark md-inactive md-18"></i>
-        </button>
-        <div class="btn-group" data-toggle="buttons">
-            <button id="shape" class="btn btn-default btn-sm" aria-text="Shape" data-toggle="dropdown">
-                <i class="icon-circle md-dark md-inactive md-18"></i><span class="caret md-dark md-inactive"></span>
+    <div id="toolbar">
+        <input id="color-picker" type="text" style="display: none" />
+        <div class="btn-group">
+            <div class="btn-group">
+                <button id="brush" class="btn btn-default btn-sm" aria-text="Brush">
+                    <i class="icon-brush md-dark md-active md-18"></i>
+                </button>
+                <button class="btn btn-default btn-sm" aria-text="Brush Options" data-toggle="dropdown">
+                    <span class="caret md-dark"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <label for="brushRadius">Brush radius:</label>
+                        <input name="brushRadius" type="number" min="0" max="15" />
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button id="line" class="btn btn-default btn-sm" aria-text="Line tool">
+                    <i class="icon-line md-dark md-inactive md-18"></i>
+                </button>
+                <button class="btn btn-default btn-sm" aria-text="Line Options" data-toggle="dropdown">
+                    <span class="caret md-dark"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <label for="lineThickness">Line thickness:</label>
+                        <input name="lineThickness" type="number" min="1" max="100" />
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group" data-toggle="buttons">
+                <button id="shape" class="btn btn-default btn-sm" aria-text="Shape">
+                    <i class="icon-circle md-dark md-inactive md-18"></i>
+                </button>
+                <button class="btn btn-default btn-sm" aria-text="Shape" data-toggle="dropdown">
+                    <span class="caret md-dark"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <label for="maintainAspect">Maintain aspect:</label>
+                        <input name="maintainAspect" type="checkbox" checked />
+                    </li>
+                    <li>
+                        <a id="circle" role="button" style="display:inline-block">
+                            <i class="icon-circle md-dark md-18"></i>
+                        </a>
+                        <a id="triangle" role="button" style="display:inline-block">
+                            <i class="icon-triangle md-dark md-18"></i>
+                        </a>
+                        <a id="square" role="button" style="display:inline-block">
+                            <i class="icon-square md-dark md-18"></i>
+                        </a>
+                        <a id="diamond" role="button" style="display:inline-block">
+                            <i class="icon-diamond md-dark md-18"></i>
+                        </a>
+                        <a id="pentagon" role="button" style="display:inline-block">
+                            <i class="icon-pentagon md-dark md-18"></i>
+                        </a>
+                        <a id="hexagon" role="button" style="display:inline-block">
+                            <i class="icon-hexagon md-dark md-18"></i>
+                        </a>
+                        <a id="star" role="button" style="display:inline-block">
+                            <i class="icon-star md-dark md-18"></i>
+                        </a>
+                        <a id="heart" role="button" style="display:inline-block">
+                            <i class="icon-heart md-dark md-18"></i>
+                        </a>
+                        <a id="flower" role="button" style="display:inline-block">
+                            <i class="icon-flower md-dark md-18"></i>
+                        </a>
+                        <a id="bat" role="button" style="display:inline-block">
+                            <i class="icon-bat md-dark md-18"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button id="other" class="btn btn-default btn-sm" aria-text="Other tool">
+                    <i class="icon-pan md-dark md-inactive md-18"></i>
+                </button>
+                <button class="btn btn-default btn-sm" aria-text="Other Tools" data-toggle="dropdown">
+                    <span class="caret md-dark"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li>
+                        <a id="pan-tool" role="button">
+                            <i class="icon-pan md-dark md-18"></i>Panning tool
+                        </a>
+                        <a id="paint-bucket" role="button">
+                            <i class="icon-bucket md-dark md-18"></i>Paint bucket
+                        </a>
+                        <a id="color-sampler" role="button">
+                            <i class="icon-eyedropper md-dark md-18"></i>Color sampler
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button id="undo" class="btn btn-default btn-sm" type="button" aria-label="Undo">
+                <i class="icon-undo md-dark md-18"></i>
             </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                      <a id="circle" role="button" style="display:inline-block">
-                          <i class="icon-circle md-dark md-18"></i>
-                      </a>
-                      <a id="triangle" role="button" style="display:inline-block">
-                          <i class="icon-triangle md-dark md-18"></i>
-                      </a>
-                      <a id="square" role="button" style="display:inline-block">
-                          <i class="icon-square md-dark md-18"></i>
-                      </a>
-                      <a id="diamond" role="button" style="display:inline-block">
-                          <i class="icon-diamond md-dark md-18"></i>
-                      </a>
-                      <a id="pentagon" role="button" style="display:inline-block">
-                          <i class="icon-pentagon md-dark md-18"></i>
-                      </a>
-                      <a id="hexagon" role="button" style="display:inline-block">
-                          <i class="icon-hexagon md-dark md-18"></i>
-                      </a>
-                      <a id="star" role="button" style="display:inline-block">
-                          <i class="icon-star md-dark md-18"></i>
-                      </a>
-                      <a id="heart" role="button" style="display:inline-block">
-                          <i class="icon-heart md-dark md-18"></i>
-                      </a>
-                      <a id="flower" role="button" style="display:inline-block">
-                          <i class="icon-flower md-dark md-18"></i>
-                      </a>
-                      <a id="bat" role="button" style="display:inline-block">
-                          <i class="icon-bat md-dark md-18"></i>
-                      </a>
-                </li>
-            </ul>
+            <button id="redo" class="btn btn-default btn-sm" type="button" aria-label="Redo">
+                <i class="icon-redo md-dark md-18"></i>
+            </button>
+            <button id="upload" class="btn btn-default btn-sm" type="button" aria-label="Upload image">
+                <i class="icon-picture md-dark md-18"></i>
+            </button>
+            <button id="download" class="btn btn-default btn-sm" type="button" aria-label="Download as image">
+                <i class="icon-download md-dark md-18"></i>
+            </button>
+            <button id="options" class="btn btn-default btn-sm" type="button" aria-label="Options">
+                <i class="icon-cog md-dark md-18"></i>
+            </button>
         </div>
     </div>
-    <div class="btn-group">
-        <button id="upload" class="btn btn-default btn-sm" type="button" aria-label="Upload image">
-            <i class="icon-picture md-dark md-18"></i>
-        </button>
-        <button id="download" class="btn btn-default btn-sm" type="button" aria-label="Download as image">
-            <i class="icon-download md-dark md-18"></i>
-        </button>
-        <button id="options" class="btn btn-default btn-sm" type="button" aria-label="Options">
-            <i class="icon-cog md-dark md-18"></i>
-        </button>
-    </div>
-</div>
-<canvas id="offscreen-canvas"></canvas>
-<canvas id="onscreen-canvas"></canvas>
+    <canvas id="offscreen-canvas" width="0" height="0"></canvas>
+    <canvas id="onscreen-canvas" width="0" height="0"></canvas>
 
-<!-- Additional scripts -->
-<script id="vs-hexel" type="notjs">
-    #ifdef GL_ES
-    precision mediump float;
-    #endif
-
-    // Used to compute gl_Position
-    uniform mat4        u_MVP;
-    attribute vec2      a_position;
-
-    // Used to compute v_color
-    uniform sampler2D   u_tex;
-    uniform vec2        u_baseTexCoord;
-    attribute vec2      a_texCoord;
-    attribute float     a_gradient;
-    varying vec4        v_color;
-
-    void main() {
-    gl_Position = u_MVP * vec4(a_position, 1.0, 1.0);
-      v_color = texture2D(u_tex, u_baseTexCoord + a_texCoord);
-      v_color.r += a_gradient;
-      v_color.g += a_gradient;
-      v_color.b += a_gradient;
-      v_color.a  = 1.0;
-    }
-</script>
-
-<script id="fs-hexel" type="notjs">
-    #ifdef GL_ES
-    precision mediump float;
-    #endif
-
-    varying vec4 v_color;
-
-    void main() {
-    gl_FragColor = v_color;
-    }
-</script>
-
-<script id="vs-poly" type="notjs">
-    #ifdef GL_ES
-    precision mediump float;
-    #endif
-
-    uniform mat4    u_MVP;
-    uniform mat3    u_shapeMatrix;
-    attribute vec2  a_position;
-
-    void main() {
-      vec3 shapePosition = u_shapeMatrix * vec3(a_position,1.0);
-      gl_Position = u_MVP * vec4(shapePosition,1.0);
-    }
-</script>
-
-<script id="fs-poly" type="notjs">
-    #ifdef GL_ES
-    precision mediump float;
-    #endif
-
-    uniform vec4 u_color;
-
-    void main() {
-    gl_FragColor = u_color;
-    }
-</script>
-
-<script id="vs-ellipse" type="notjs">
-    #ifdef GL_ES
-    precision mediump float;
-    #endif
-
-    uniform mat4    u_MVP;
-    uniform vec4    u_rect;     // left, bottom, width, height
-    attribute vec2  a_texCoord; // (0,1),(0,0),(1,0),(1,1)
-    varying vec2    v_texCoord; // interpolated from a_texCoord
-
-    void main() {
-    float vx = u_rect[2] * a_texCoord.x + u_rect[0]; // width*x + left
-    float vy = u_rect[3] * a_texCoord.y + u_rect[1]; // height*y + bottom
-    gl_Position = u_MVP * vec4(vx, vy, 1.0, 1.0);
-    v_texCoord = a_texCoord;
-    }
-</script>
-
-<script id="fs-ellipse" type="notjs">
-    #ifdef GL_ES
-    precision mediump float;
-    #endif
-
-    uniform vec4 u_color;
-    varying vec2 v_texCoord;
-
-    void main() {
-    // Compute distance squared from tex coord to center of fragment
-    float dx = v_texCoord.x * 2.0 - 1.0;
-    float dy = v_texCoord.y * 2.0 - 1.0;
-    float dist2 = dx * dx + dy * dy;
-    // This pixel is in the ellipse if dist2 <= 1.0,
-    float isInEllipse = float(dist2 <= 1.0);
-    // Next line keeps color if isInEllipse = 1 (true),
-    // and makes it transparent if isInEllipse = 0 (false)
-    gl_FragColor = u_color * isInEllipse;
-    }
-</script>
-
-<script id="vs-line" type="notjs">
-    #ifdef GL_ES
-    precision mediump float;
-    #endif
-
-    uniform mat4    u_MVP;       // Model View Projection matrix
-    uniform vec4    u_line;      // x1, y1, x2, y2 -> (start, end) of line segment
-    uniform float   u_thickness; // thickness of line segment
-    attribute vec2  a_position;  // static (0,0.5),(0,-0.5),(1,-0.5),(1,0.5)
-
-    void main() {
-    // 1. Let p1 = (x1,y1), p2 = (x2,y2)
-    vec2 p1 = vec2(u_line[0], u_line[1]);
-    vec2 p2 = vec2(u_line[2], u_line[3]);
-
-    // 2. Scale the square {left: 0, right: 1, bottom: -0.5, top: 0.5}
-    // to a rectangle with width=dist(p1,p2), and height = u_thickness.
-    float width = distance(p1, p2);
-    float height = u_thickness;
-    float sx = width * a_position.x;
-    float sy = height * a_position.y;
-
-    // 3. Rotate the rectangle by the angle formed by p2, p1, and (x1+e, y1) for any e>0.
-    float hypotenuse = width;
-    float adjacent = p2.x - p1.x;
-    float opposite = p2.y - p1.y;
-    float sin = opposite / hypotenuse;
-    float cos = adjacent / hypotenuse;
-    float rx = cos * sx - sin * sy;
-    float ry = sin * sx + cos * sy;
-
-    // 4. Translate rectangle to p1
-    float tx = rx + p1.x;
-    float ty = ry + p1.y;
-
-    // 5. Apply MVP matrix and we are done.
-    gl_Position = u_MVP * vec4(tx, ty, 1.0, 1.0);
-    }
-</script>
-
-<script id="fs-line" type="notjs">
-    #ifdef GL_ES
-    precision mediump float;
-    #endif
-
-    uniform vec4 u_color;
-
-    void main() {
-    gl_FragColor = u_color;
-    }
-</script>
-
-<script src="js/CanvasSaver.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
-<script src="js/bootstrap-slider.min.js"></script>
-<script src="js/vex.combined.min.js"></script>
-<script src="js/twgl-full.min.js"></script>
-<script src="js/hammer.min.js"></script>
-<script src="js/hexart-bundle.min.js"></script>
+    <script src="js/CanvasSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/vex.combined.min.js"></script>
+    <script src="js/hexart-bundle.min.js"></script>
 
 </body>
 </html>
