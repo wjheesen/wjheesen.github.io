@@ -5,7 +5,40 @@ title: Home page
 
 <div class="content-block">
 
-<h1>Wjheesen's apps</h1>
+<h1>Web apps</h1>
+
+<div class="container">
+    <div class="row">
+        <div class='col-xs-12 col-sm-6'>
+            <a href='https://wjheesen.github.io/hexelart'>
+                <img class='img-responsive center-block' src='images/hexel_art_icon.png' />
+            </a>
+        </div>
+        <div class='clearfix visible-xs-block'></div>
+        <div class='col-xs-12 col-sm-6'>
+            <a href='https://wjheesen.github.io/hexelart'>
+                Hexel Art
+            </a>
+            <br />
+            Like pixel art, but with hexagons ("hexels") instead of squares.
+            Features brush, line, shape, paint bucket, color sampler, and panning tools.
+            Zoom in and out with the mouse wheel, or with a pinch guesture on touch screen devices.
+            Choose a grid size anywhere from 32x32 to 512x512 hexels.
+            Upload an image onto the grid to transform it into hexels.
+            Download your artwork as a .png file that you can later reupload.
+            <br />
+            <i>
+              Note: My first experience working with WebGL, TypeScript, XSD, npm, and gulp.
+              Each of these languages/tools have changed my perspective on app development.
+            </i>
+        </div>
+    </div>  <!-- End Row -->
+</div> <!-- End Container -->
+</div>  <!-- End Content Block -->
+
+<div class="content-block">
+
+<h1>Android apps</h1>
 
 <div class="container">
 
@@ -85,7 +118,7 @@ title: Home page
 </div>  <!-- End Content Block -->
 
 <div class="content-block">
-  <h1>Wjheesen's blog</h1>
+  <h1>Blog</h1>
   <ul class="posts">
     {% for post in site.posts %}
       <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
