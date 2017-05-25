@@ -1,0 +1,13 @@
+{
+    "bat": "\\f101",
+    "circle": "\\f102",
+    "diamond": "\\f103",
+    "flower": "\\f104",
+    "heart": "\\f105",
+    "hexagon": "\\f106",
+    "line": "\\f107",
+    "pentagon": "\\f108",
+    "square": "\\f109",
+    "star": "\\f10a",
+    "triangle": "\\f10b"
+}

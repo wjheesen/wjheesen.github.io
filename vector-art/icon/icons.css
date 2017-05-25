@@ -1,0 +1,52 @@
+@font-face {
+    font-family: "icons";
+    src: url("./icons.eot?1769358f15ae46c33f91249cc9d636a9?#iefix") format("embedded-opentype"),
+url("./icons.woff?1769358f15ae46c33f91249cc9d636a9") format("woff"),
+url("./icons.ttf?1769358f15ae46c33f91249cc9d636a9") format("truetype"),
+url("./icons.svg?1769358f15ae46c33f91249cc9d636a9#icons") format("svg");
+}
+
+i {
+    line-height: 1;
+}
+
+i:before {
+    font-family: icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    vertical-align: top;
+}
+
+.icon-bat:before {
+    content: "\f101";
+}
+.icon-circle:before {
+    content: "\f102";
+}
+.icon-diamond:before {
+    content: "\f103";
+}
+.icon-flower:before {
+    content: "\f104";
+}
+.icon-heart:before {
+    content: "\f105";
+}
+.icon-hexagon:before {
+    content: "\f106";
+}
+.icon-line:before {
+    content: "\f107";
+}
+.icon-pentagon:before {
+    content: "\f108";
+}
+.icon-square:before {
+    content: "\f109";
+}
+.icon-star:before {
+    content: "\f10a";
+}
+.icon-triangle:before {
+    content: "\f10b";
+}
