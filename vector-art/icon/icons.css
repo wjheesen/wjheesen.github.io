@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?1769358f15ae46c33f91249cc9d636a9?#iefix") format("embedded-opentype"),
-url("./icons.woff?1769358f15ae46c33f91249cc9d636a9") format("woff"),
-url("./icons.ttf?1769358f15ae46c33f91249cc9d636a9") format("truetype"),
-url("./icons.svg?1769358f15ae46c33f91249cc9d636a9#icons") format("svg");
+    src: url("./icons.eot?5d5051addfecd7ee7eeca4da02b4c5a5?#iefix") format("embedded-opentype"),
+url("./icons.woff?5d5051addfecd7ee7eeca4da02b4c5a5") format("woff"),
+url("./icons.ttf?5d5051addfecd7ee7eeca4da02b4c5a5") format("truetype"),
+url("./icons.svg?5d5051addfecd7ee7eeca4da02b4c5a5#icons") format("svg");
 }
 
 i {
@@ -20,33 +20,51 @@ i:before {
 .icon-bat:before {
     content: "\f101";
 }
-.icon-circle:before {
+.icon-brush:before {
     content: "\f102";
 }
-.icon-diamond:before {
+.icon-circle:before {
     content: "\f103";
 }
-.icon-flower:before {
+.icon-cog:before {
     content: "\f104";
 }
-.icon-heart:before {
+.icon-diamond:before {
     content: "\f105";
 }
-.icon-hexagon:before {
+.icon-flower:before {
     content: "\f106";
 }
-.icon-line:before {
+.icon-heart:before {
     content: "\f107";
 }
-.icon-pentagon:before {
+.icon-hexagon:before {
     content: "\f108";
 }
-.icon-square:before {
+.icon-line:before {
     content: "\f109";
 }
-.icon-star:before {
+.icon-pan:before {
     content: "\f10a";
 }
-.icon-triangle:before {
+.icon-pentagon:before {
     content: "\f10b";
+}
+.icon-redo:before {
+    content: "\f10c";
+}
+.icon-select:before {
+    content: "\f10d";
+}
+.icon-square:before {
+    content: "\f10e";
+}
+.icon-star:before {
+    content: "\f10f";
+}
+.icon-triangle:before {
+    content: "\f110";
+}
+.icon-undo:before {
+    content: "\f111";
 }

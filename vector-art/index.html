@@ -13,16 +13,17 @@
 <body>
     <div id="toolbar">
         <input id="color-picker" type="text" style="display: none" />
-        <div class="btn-group">
+        <div class="btn-group"> 
+            <div class="btn-group">
                 <button id="shape-button" type="button" class="btn btn-sm">
                     <i></i>
                 </button>
                 <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
-                <div class="dropdown-menu">
-                    <label for="maintainAspect">Maintain aspect:</label>
-                    <input name="maintainAspect" type="checkbox" checked />
+                <div id="shape-settings" class="dropdown-menu">
+                    <label for="maintain-aspect">Maintain aspect:</label>
+                    <input name="maintain-aspect" type="checkbox" checked />
                     <div class="dropdown-divider"></div>
                                             <a id="triangle" role="button">
                             <i class="icon-triangle md-dark md-18"></i>
@@ -56,11 +57,50 @@
                         </a>
                                     </div>
             </div>
-        <button id='line-button' class='btn btn-sm btn-primary' type='button'>line</button>
-<button id='brush-button' class='btn btn-sm btn-primary' type='button'>brush</button>
-<button id='pan-button' class='btn btn-sm btn-primary' type='button'>pan</button>
-<button id='select-button' class='btn btn-sm btn-primary' type='button'>select</button>
-<button id='delete-button' class='btn btn-sm btn-primary' type='button'>delete</button>
+            <div class="btn-group">
+                <button id="stroke-button" type="button" class="btn btn-sm">
+                    <i></i>
+                </button>
+                <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div id="stroke-settings" class="dropdown-menu">
+                    <label for="stroke-thickness">Thickness:</label>
+                    <input name="stroke-thickness" type="number" />
+                    <div class="dropdown-divider"></div>
+                                            <a id="brush" role="button">
+                            <i class="icon-brush md-dark md-18"></i>
+                        </a>
+                                            <a id="line" role="button">
+                            <i class="icon-line md-dark md-18"></i>
+                        </a>
+                                    </div>
+            </div>
+            <div class="btn-group">
+                <button id="tool-button" type="button" class="btn btn-sm">
+                    <i></i>
+                </button>
+                <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div id="tool-settings" class="dropdown-menu">
+                                            <a id="select" role="button">
+                            <i class="icon-select md-dark md-18"></i>
+                        </a>
+                                            <a id="pan" role="button">
+                            <i class="icon-pan md-dark md-18"></i>
+                        </a>
+                                    </div>
+            </div>
+        </div>
+        <div class="btn-group">
+                            <button id="undo" class="btn btn-sm" type='button'>
+                    <i class="icon-undo md-dark md-18"></i>
+                </button>
+                            <button id="redo" class="btn btn-sm" type='button'>
+                    <i class="icon-redo md-dark md-18"></i>
+                </button>
+                    </div>
     </div>
     <canvas id="canvas" width="0" height="0"></canvas>
     <script src="bundle.js"></script>
