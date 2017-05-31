@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?5d5051addfecd7ee7eeca4da02b4c5a5?#iefix") format("embedded-opentype"),
-url("./icons.woff?5d5051addfecd7ee7eeca4da02b4c5a5") format("woff"),
-url("./icons.ttf?5d5051addfecd7ee7eeca4da02b4c5a5") format("truetype"),
-url("./icons.svg?5d5051addfecd7ee7eeca4da02b4c5a5#icons") format("svg");
+    src: url("./icons.eot?d4d2199c968545bed734651d363ed4ef?#iefix") format("embedded-opentype"),
+url("./icons.woff?d4d2199c968545bed734651d363ed4ef") format("woff"),
+url("./icons.ttf?d4d2199c968545bed734651d363ed4ef") format("truetype"),
+url("./icons.svg?d4d2199c968545bed734651d363ed4ef#icons") format("svg");
 }
 
 i {
@@ -56,15 +56,18 @@ i:before {
 .icon-select:before {
     content: "\f10d";
 }
-.icon-square:before {
+.icon-spray-can:before {
     content: "\f10e";
 }
-.icon-star:before {
+.icon-square:before {
     content: "\f10f";
 }
-.icon-triangle:before {
+.icon-star:before {
     content: "\f110";
 }
-.icon-undo:before {
+.icon-triangle:before {
     content: "\f111";
+}
+.icon-undo:before {
+    content: "\f112";
 }
