@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?d4d2199c968545bed734651d363ed4ef?#iefix") format("embedded-opentype"),
-url("./icons.woff?d4d2199c968545bed734651d363ed4ef") format("woff"),
-url("./icons.ttf?d4d2199c968545bed734651d363ed4ef") format("truetype"),
-url("./icons.svg?d4d2199c968545bed734651d363ed4ef#icons") format("svg");
+    src: url("./icons.eot?d036e2881177f05bff937a7c08e2ed22?#iefix") format("embedded-opentype"),
+url("./icons.woff?d036e2881177f05bff937a7c08e2ed22") format("woff"),
+url("./icons.ttf?d036e2881177f05bff937a7c08e2ed22") format("truetype"),
+url("./icons.svg?d036e2881177f05bff937a7c08e2ed22#icons") format("svg");
 }
 
 i {
@@ -41,33 +41,36 @@ i:before {
 .icon-hexagon:before {
     content: "\f108";
 }
-.icon-line:before {
+.icon-layer:before {
     content: "\f109";
 }
-.icon-pan:before {
+.icon-line:before {
     content: "\f10a";
 }
-.icon-pentagon:before {
+.icon-pan:before {
     content: "\f10b";
 }
-.icon-redo:before {
+.icon-pentagon:before {
     content: "\f10c";
 }
-.icon-select:before {
+.icon-redo:before {
     content: "\f10d";
 }
-.icon-spray-can:before {
+.icon-select:before {
     content: "\f10e";
 }
-.icon-square:before {
+.icon-spray-can:before {
     content: "\f10f";
 }
-.icon-star:before {
+.icon-square:before {
     content: "\f110";
 }
-.icon-triangle:before {
+.icon-star:before {
     content: "\f111";
 }
-.icon-undo:before {
+.icon-triangle:before {
     content: "\f112";
+}
+.icon-undo:before {
+    content: "\f113";
 }
