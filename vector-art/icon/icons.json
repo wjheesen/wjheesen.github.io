@@ -13,9 +13,14 @@
     "pentagon": "\\f10c",
     "redo": "\\f10d",
     "select": "\\f10e",
-    "spray-can": "\\f10f",
-    "square": "\\f110",
-    "star": "\\f111",
-    "triangle": "\\f112",
-    "undo": "\\f113"
+    "shape-stroke": "\\f10f",
+    "spray-can": "\\f110",
+    "spray": "\\f111",
+    "square": "\\f112",
+    "star": "\\f113",
+    "star16": "\\f114",
+    "star6": "\\f115",
+    "star8": "\\f116",
+    "triangle": "\\f117",
+    "undo": "\\f118"
 }
