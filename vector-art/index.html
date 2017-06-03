@@ -12,19 +12,13 @@
 </head>
 <body>
     <div id="toolbar">
-        <input id="color-picker" type="text" style="display: none" />
+        <input id="color-settings" type="text" style="display: none" />
         <div class="btn-group"> 
             <div class="btn-group">
-                <button id="shape-button" type="button" class="btn btn-sm">
-                    <i class="md md-inactive"></i>
+                <button id="shape-button" type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="md"></i><span class="sr-only">Toggle Dropdown</span>
                 </button>
-                <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div id="shape-settings" class="dropdown-menu">
-                    <label for="maintain-aspect">Maintain aspect:</label>
-                    <input name="maintain-aspect" type="checkbox" checked />
-                    <div class="dropdown-divider"></div>
+                <div id="shape-settings" class="dropdown-menu" aria-labelledby="shape-button">
                                             <a id="triangle" role="button">
                             <i class="icon-triangle md"></i>
                         </a>
@@ -70,48 +64,45 @@
                                     </div>
             </div>
             <div class="btn-group">
-                <button id="stroke-button" type="button" class="btn btn-sm">
-                    <i class="md md-inactive"></i>
+                <button id="tool-button" type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="md"></i><span class="sr-only">Toggle Dropdown</span>
                 </button>
-                <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div id="stroke-settings" class="dropdown-menu">
-                    <label for="stroke-thickness">Thickness:</label>
-                    <input name="stroke-thickness" type="number" />
-                    <div class="dropdown-divider"></div>
-                                            <a id="brush" role="button">
-                            <i class="icon-brush md"></i>
-                        </a>
-                                            <a id="line" role="button">
-                            <i class="icon-line md"></i>
-                        </a>
-                                            <a id="layer" role="button">
-                            <i class="icon-layer md"></i>
+                <div id="tool-settings" class="dropdown-menu" aria-labelledby="tool-button">
+                                            <a id="shape" role="button">
+                            <i class="icon-shape md"></i>
                         </a>
                                             <a id="shape-stroke" role="button">
                             <i class="icon-shape-stroke md"></i>
                         </a>
-                                            <a id="spray-can" role="button">
-                            <i class="icon-spray-can md"></i>
+                                            <a id="shape-line" role="button">
+                            <i class="icon-shape-line md"></i>
                         </a>
-                                    </div>
-            </div>
-            <div class="btn-group">
-                <button id="cursor-button" type="button" class="btn btn-sm">
-                    <i class="md md-inactive"></i>
-                </button>
-                <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div id="cursor-settings" class="dropdown-menu">
-                                            <a id="select" role="button">
-                            <i class="icon-select md"></i>
+                                            <a id="shape-spray" role="button">
+                            <i class="icon-shape-spray md"></i>
+                        </a>
+                                            <a id="stroke" role="button">
+                            <i class="icon-stroke md"></i>
+                        </a>
+                                            <a id="line" role="button">
+                            <i class="icon-line md"></i>
                         </a>
                                             <a id="pan" role="button">
                             <i class="icon-pan md"></i>
                         </a>
+                                            <a id="select" role="button">
+                            <i class="icon-select md"></i>
+                        </a>
                                     </div>
+            </div>
+            <div class="btn-group">
+                <button id="other-button" type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-cog md"></i>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div id="other-settings" class="dropdown-menu dropdown-menu-right" aria-labelledby="settings-button">
+                    <label for="stroke-thickness">Stroke Thickness:</label>
+                    <input name="stroke-thickness" type="number" />
+                </div>
             </div>
         </div>
         <div class="btn-group">
