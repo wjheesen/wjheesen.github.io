@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?d718ce482465d8364b61526ce6a67624?#iefix") format("embedded-opentype"),
-url("./icons.woff?d718ce482465d8364b61526ce6a67624") format("woff"),
-url("./icons.ttf?d718ce482465d8364b61526ce6a67624") format("truetype"),
-url("./icons.svg?d718ce482465d8364b61526ce6a67624#icons") format("svg");
+    src: url("./icons.eot?839e215fb631a5d995cf4c0d901cf070?#iefix") format("embedded-opentype"),
+url("./icons.woff?839e215fb631a5d995cf4c0d901cf070") format("woff"),
+url("./icons.ttf?839e215fb631a5d995cf4c0d901cf070") format("truetype"),
+url("./icons.svg?839e215fb631a5d995cf4c0d901cf070#icons") format("svg");
 }
 
 i {
@@ -59,42 +59,45 @@ i:before {
 .icon-select:before {
     content: "\f10e";
 }
-.icon-shape-line:before {
+.icon-shape-aspect:before {
     content: "\f10f";
 }
-.icon-shape-spray:before {
+.icon-shape-line:before {
     content: "\f110";
 }
-.icon-shape-stroke:before {
+.icon-shape-spray:before {
     content: "\f111";
 }
-.icon-shape:before {
+.icon-shape-stroke:before {
     content: "\f112";
 }
-.icon-spray:before {
+.icon-shape:before {
     content: "\f113";
 }
-.icon-square:before {
+.icon-spray:before {
     content: "\f114";
 }
-.icon-star:before {
+.icon-square:before {
     content: "\f115";
 }
-.icon-star16:before {
+.icon-star:before {
     content: "\f116";
 }
-.icon-star6:before {
+.icon-star16:before {
     content: "\f117";
 }
-.icon-star8:before {
+.icon-star6:before {
     content: "\f118";
 }
-.icon-stroke:before {
+.icon-star8:before {
     content: "\f119";
 }
-.icon-triangle:before {
+.icon-stroke:before {
     content: "\f11a";
 }
-.icon-undo:before {
+.icon-triangle:before {
     content: "\f11b";
+}
+.icon-undo:before {
+    content: "\f11c";
 }
