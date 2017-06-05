@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?839e215fb631a5d995cf4c0d901cf070?#iefix") format("embedded-opentype"),
-url("./icons.woff?839e215fb631a5d995cf4c0d901cf070") format("woff"),
-url("./icons.ttf?839e215fb631a5d995cf4c0d901cf070") format("truetype"),
-url("./icons.svg?839e215fb631a5d995cf4c0d901cf070#icons") format("svg");
+    src: url("./icons.eot?663816d25a68cf450836593ad4c755ca?#iefix") format("embedded-opentype"),
+url("./icons.woff?663816d25a68cf450836593ad4c755ca") format("woff"),
+url("./icons.ttf?663816d25a68cf450836593ad4c755ca") format("truetype"),
+url("./icons.svg?663816d25a68cf450836593ad4c755ca#icons") format("svg");
 }
 
 i {
@@ -47,57 +47,69 @@ i:before {
 .icon-line:before {
     content: "\f10a";
 }
-.icon-pan:before {
+.icon-octagon:before {
     content: "\f10b";
 }
-.icon-pentagon:before {
+.icon-pan:before {
     content: "\f10c";
 }
-.icon-redo:before {
+.icon-pentagon:before {
     content: "\f10d";
 }
-.icon-select:before {
+.icon-redo:before {
     content: "\f10e";
 }
-.icon-shape-aspect:before {
+.icon-select:before {
     content: "\f10f";
 }
-.icon-shape-line:before {
+.icon-shape-aspect:before {
     content: "\f110";
 }
-.icon-shape-spray:before {
+.icon-shape-line:before {
     content: "\f111";
 }
-.icon-shape-stroke:before {
+.icon-shape-spray:before {
     content: "\f112";
 }
-.icon-shape:before {
+.icon-shape-stroke:before {
     content: "\f113";
 }
-.icon-spray:before {
+.icon-shape:before {
     content: "\f114";
 }
-.icon-square:before {
+.icon-spray:before {
     content: "\f115";
 }
-.icon-star:before {
+.icon-square:before {
     content: "\f116";
 }
 .icon-star16:before {
     content: "\f117";
 }
-.icon-star6:before {
+.icon-star3:before {
     content: "\f118";
 }
-.icon-star8:before {
+.icon-star4:before {
     content: "\f119";
 }
-.icon-stroke:before {
+.icon-star5:before {
     content: "\f11a";
 }
-.icon-triangle:before {
+.icon-star6:before {
     content: "\f11b";
 }
-.icon-undo:before {
+.icon-star8:before {
     content: "\f11c";
+}
+.icon-stroke:before {
+    content: "\f11d";
+}
+.icon-sun:before {
+    content: "\f11e";
+}
+.icon-triangle:before {
+    content: "\f11f";
+}
+.icon-undo:before {
+    content: "\f120";
 }
