@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?663816d25a68cf450836593ad4c755ca?#iefix") format("embedded-opentype"),
-url("./icons.woff?663816d25a68cf450836593ad4c755ca") format("woff"),
-url("./icons.ttf?663816d25a68cf450836593ad4c755ca") format("truetype"),
-url("./icons.svg?663816d25a68cf450836593ad4c755ca#icons") format("svg");
+    src: url("./icons.eot?161d4dd84cd32d81c7ff2329aaab3df8?#iefix") format("embedded-opentype"),
+url("./icons.woff?161d4dd84cd32d81c7ff2329aaab3df8") format("woff"),
+url("./icons.ttf?161d4dd84cd32d81c7ff2329aaab3df8") format("truetype"),
+url("./icons.svg?161d4dd84cd32d81c7ff2329aaab3df8#icons") format("svg");
 }
 
 i {
@@ -29,87 +29,90 @@ i:before {
 .icon-cog:before {
     content: "\f104";
 }
-.icon-diamond:before {
+.icon-color-sampler:before {
     content: "\f105";
 }
-.icon-flower:before {
+.icon-diamond:before {
     content: "\f106";
 }
-.icon-heart:before {
+.icon-flower:before {
     content: "\f107";
 }
-.icon-hexagon:before {
+.icon-heart:before {
     content: "\f108";
 }
-.icon-layer:before {
+.icon-hexagon:before {
     content: "\f109";
 }
-.icon-line:before {
+.icon-layer:before {
     content: "\f10a";
 }
-.icon-octagon:before {
+.icon-line:before {
     content: "\f10b";
 }
-.icon-pan:before {
+.icon-octagon:before {
     content: "\f10c";
 }
-.icon-pentagon:before {
+.icon-pan:before {
     content: "\f10d";
 }
-.icon-redo:before {
+.icon-pentagon:before {
     content: "\f10e";
 }
-.icon-select:before {
+.icon-redo:before {
     content: "\f10f";
 }
-.icon-shape-aspect:before {
+.icon-select:before {
     content: "\f110";
 }
-.icon-shape-line:before {
+.icon-shape-aspect:before {
     content: "\f111";
 }
-.icon-shape-spray:before {
+.icon-shape-line:before {
     content: "\f112";
 }
-.icon-shape-stroke:before {
+.icon-shape-spray:before {
     content: "\f113";
 }
-.icon-shape:before {
+.icon-shape-stroke:before {
     content: "\f114";
 }
-.icon-spray:before {
+.icon-shape:before {
     content: "\f115";
 }
-.icon-square:before {
+.icon-spray:before {
     content: "\f116";
 }
-.icon-star16:before {
+.icon-square:before {
     content: "\f117";
 }
-.icon-star3:before {
+.icon-star16:before {
     content: "\f118";
 }
-.icon-star4:before {
+.icon-star3:before {
     content: "\f119";
 }
-.icon-star5:before {
+.icon-star4:before {
     content: "\f11a";
 }
-.icon-star6:before {
+.icon-star5:before {
     content: "\f11b";
 }
-.icon-star8:before {
+.icon-star6:before {
     content: "\f11c";
 }
-.icon-stroke:before {
+.icon-star8:before {
     content: "\f11d";
 }
-.icon-sun:before {
+.icon-stroke:before {
     content: "\f11e";
 }
-.icon-triangle:before {
+.icon-sun:before {
     content: "\f11f";
 }
-.icon-undo:before {
+.icon-triangle:before {
     content: "\f120";
+}
+.icon-undo:before {
+    content: "\f121";
 }
