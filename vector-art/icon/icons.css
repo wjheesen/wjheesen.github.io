@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?161d4dd84cd32d81c7ff2329aaab3df8?#iefix") format("embedded-opentype"),
-url("./icons.woff?161d4dd84cd32d81c7ff2329aaab3df8") format("woff"),
-url("./icons.ttf?161d4dd84cd32d81c7ff2329aaab3df8") format("truetype"),
-url("./icons.svg?161d4dd84cd32d81c7ff2329aaab3df8#icons") format("svg");
+    src: url("./icons.eot?0e6cf54ef0416edc17c2e58a54402d23?#iefix") format("embedded-opentype"),
+url("./icons.woff?0e6cf54ef0416edc17c2e58a54402d23") format("woff"),
+url("./icons.ttf?0e6cf54ef0416edc17c2e58a54402d23") format("truetype"),
+url("./icons.svg?0e6cf54ef0416edc17c2e58a54402d23#icons") format("svg");
 }
 
 i {
@@ -17,7 +17,7 @@ i:before {
     vertical-align: top;
 }
 
-.icon-aspect-ratio:before {
+.icon-aspectRatio:before {
     content: "\f101";
 }
 .icon-bat:before {
@@ -29,7 +29,7 @@ i:before {
 .icon-cog:before {
     content: "\f104";
 }
-.icon-color-sampler:before {
+.icon-colorSampler:before {
     content: "\f105";
 }
 .icon-diamond:before {
@@ -65,19 +65,19 @@ i:before {
 .icon-select:before {
     content: "\f110";
 }
-.icon-shape-aspect:before {
+.icon-shape:before {
     content: "\f111";
 }
-.icon-shape-line:before {
+.icon-shapeAspect:before {
     content: "\f112";
 }
-.icon-shape-spray:before {
+.icon-shapeLine:before {
     content: "\f113";
 }
-.icon-shape-stroke:before {
+.icon-shapeSpray:before {
     content: "\f114";
 }
-.icon-shape:before {
+.icon-shapeStroke:before {
     content: "\f115";
 }
 .icon-spray:before {
