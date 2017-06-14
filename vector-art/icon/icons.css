@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?0e6cf54ef0416edc17c2e58a54402d23?#iefix") format("embedded-opentype"),
-url("./icons.woff?0e6cf54ef0416edc17c2e58a54402d23") format("woff"),
-url("./icons.ttf?0e6cf54ef0416edc17c2e58a54402d23") format("truetype"),
-url("./icons.svg?0e6cf54ef0416edc17c2e58a54402d23#icons") format("svg");
+    src: url("./icons.eot?c5d7969f36682a8031f5a95de58b994b?#iefix") format("embedded-opentype"),
+url("./icons.woff?c5d7969f36682a8031f5a95de58b994b") format("woff"),
+url("./icons.ttf?c5d7969f36682a8031f5a95de58b994b") format("truetype"),
+url("./icons.svg?c5d7969f36682a8031f5a95de58b994b#icons") format("svg");
 }
 
 i {
@@ -17,19 +17,19 @@ i:before {
     vertical-align: top;
 }
 
-.icon-aspectRatio:before {
+.icon-bat:before {
     content: "\f101";
 }
-.icon-bat:before {
+.icon-blockFlower4:before {
     content: "\f102";
 }
-.icon-circle:before {
+.icon-blockFlower5:before {
     content: "\f103";
 }
-.icon-cog:before {
+.icon-chevron:before {
     content: "\f104";
 }
-.icon-colorSampler:before {
+.icon-cloud:before {
     content: "\f105";
 }
 .icon-diamond:before {
@@ -44,75 +44,111 @@ i:before {
 .icon-hexagon:before {
     content: "\f109";
 }
-.icon-layer:before {
+.icon-hourglass:before {
     content: "\f10a";
 }
-.icon-line:before {
+.icon-kite:before {
     content: "\f10b";
 }
-.icon-octagon:before {
+.icon-leaf:before {
     content: "\f10c";
 }
-.icon-pan:before {
+.icon-octagon:before {
     content: "\f10d";
 }
 .icon-pentagon:before {
     content: "\f10e";
 }
-.icon-redo:before {
+.icon-pineTree:before {
     content: "\f10f";
 }
-.icon-select:before {
+.icon-raindrop:before {
     content: "\f110";
 }
-.icon-shape:before {
+.icon-spray:before {
     content: "\f111";
 }
-.icon-shapeAspect:before {
+.icon-square:before {
     content: "\f112";
 }
-.icon-shapeLine:before {
+.icon-star16:before {
     content: "\f113";
 }
-.icon-shapeSpray:before {
+.icon-star3:before {
     content: "\f114";
 }
-.icon-shapeStroke:before {
+.icon-star4:before {
     content: "\f115";
 }
-.icon-spray:before {
+.icon-star5:before {
     content: "\f116";
 }
-.icon-square:before {
+.icon-star6:before {
     content: "\f117";
 }
-.icon-star16:before {
+.icon-star8:before {
     content: "\f118";
 }
-.icon-star3:before {
+.icon-sun:before {
     content: "\f119";
 }
-.icon-star4:before {
+.icon-trapezoid:before {
     content: "\f11a";
 }
-.icon-star5:before {
+.icon-triangle:before {
     content: "\f11b";
 }
-.icon-star6:before {
+.icon-triangleFlower1:before {
     content: "\f11c";
 }
-.icon-star8:before {
+.icon-triangleFlower2:before {
     content: "\f11d";
 }
-.icon-stroke:before {
+.icon-triangleFrame:before {
     content: "\f11e";
 }
-.icon-sun:before {
+.icon-triforce:before {
     content: "\f11f";
 }
-.icon-triangle:before {
+.icon-umbrella:before {
     content: "\f120";
 }
-.icon-undo:before {
+.icon-cog:before {
     content: "\f121";
+}
+.icon-redo:before {
+    content: "\f122";
+}
+.icon-undo:before {
+    content: "\f123";
+}
+.icon-circle:before {
+    content: "\f124";
+}
+.icon-colorSampler:before {
+    content: "\f125";
+}
+.icon-line:before {
+    content: "\f126";
+}
+.icon-pan:before {
+    content: "\f127";
+}
+.icon-select:before {
+    content: "\f128";
+}
+.icon-shape:before {
+    content: "\f129";
+}
+.icon-shapeAspect:before {
+    content: "\f12a";
+}
+.icon-shapeLine:before {
+    content: "\f12b";
+}
+.icon-shapeSpray:before {
+    content: "\f12c";
+}
+.icon-shapeStroke:before {
+    content: "\f12d";
 }
