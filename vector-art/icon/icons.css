@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?c5d7969f36682a8031f5a95de58b994b?#iefix") format("embedded-opentype"),
-url("./icons.woff?c5d7969f36682a8031f5a95de58b994b") format("woff"),
-url("./icons.ttf?c5d7969f36682a8031f5a95de58b994b") format("truetype"),
-url("./icons.svg?c5d7969f36682a8031f5a95de58b994b#icons") format("svg");
+    src: url("./icons.eot?b728ea4be7c66aacacb09f1157e32a41?#iefix") format("embedded-opentype"),
+url("./icons.woff?b728ea4be7c66aacacb09f1157e32a41") format("woff"),
+url("./icons.ttf?b728ea4be7c66aacacb09f1157e32a41") format("truetype"),
+url("./icons.svg?b728ea4be7c66aacacb09f1157e32a41#icons") format("svg");
 }
 
 i {
@@ -17,138 +17,144 @@ i:before {
     vertical-align: top;
 }
 
-.icon-bat:before {
+.icon-arrow:before {
     content: "\f101";
 }
-.icon-blockFlower4:before {
+.icon-bat:before {
     content: "\f102";
 }
-.icon-blockFlower5:before {
+.icon-blockFlower4:before {
     content: "\f103";
 }
-.icon-chevron:before {
+.icon-blockFlower5:before {
     content: "\f104";
 }
-.icon-cloud:before {
+.icon-chevron:before {
     content: "\f105";
 }
-.icon-diamond:before {
+.icon-cloud:before {
     content: "\f106";
 }
-.icon-flower:before {
+.icon-diamond:before {
     content: "\f107";
 }
-.icon-heart:before {
+.icon-flower:before {
     content: "\f108";
 }
-.icon-hexagon:before {
+.icon-heart:before {
     content: "\f109";
 }
-.icon-hourglass:before {
+.icon-hexagon:before {
     content: "\f10a";
 }
-.icon-kite:before {
+.icon-hourglass:before {
     content: "\f10b";
 }
-.icon-leaf:before {
+.icon-kite:before {
     content: "\f10c";
 }
-.icon-octagon:before {
+.icon-leaf:before {
     content: "\f10d";
 }
-.icon-pentagon:before {
+.icon-octagon:before {
     content: "\f10e";
 }
-.icon-pineTree:before {
+.icon-pentagon:before {
     content: "\f10f";
 }
-.icon-raindrop:before {
+.icon-pineTree:before {
     content: "\f110";
 }
-.icon-spray:before {
+.icon-raindrop:before {
     content: "\f111";
 }
-.icon-square:before {
+.icon-spray:before {
     content: "\f112";
 }
-.icon-star16:before {
+.icon-square:before {
     content: "\f113";
 }
-.icon-star3:before {
+.icon-star16:before {
     content: "\f114";
 }
-.icon-star4:before {
+.icon-star3:before {
     content: "\f115";
 }
-.icon-star5:before {
+.icon-star4:before {
     content: "\f116";
 }
-.icon-star6:before {
+.icon-star5:before {
     content: "\f117";
 }
-.icon-star8:before {
+.icon-star6:before {
     content: "\f118";
 }
-.icon-sun:before {
+.icon-star8:before {
     content: "\f119";
 }
-.icon-trapezoid:before {
+.icon-sun:before {
     content: "\f11a";
 }
-.icon-triangle:before {
+.icon-trapezoid:before {
     content: "\f11b";
 }
-.icon-triangleFlower1:before {
+.icon-triangle:before {
     content: "\f11c";
 }
-.icon-triangleFlower2:before {
+.icon-triangleFlower1:before {
     content: "\f11d";
 }
-.icon-triangleFrame:before {
+.icon-triangleFlower2:before {
     content: "\f11e";
 }
-.icon-triforce:before {
+.icon-triangleFrame:before {
     content: "\f11f";
 }
-.icon-umbrella:before {
+.icon-triforce:before {
     content: "\f120";
 }
-.icon-cog:before {
+.icon-umbrella:before {
     content: "\f121";
 }
-.icon-redo:before {
+.icon-cog:before {
     content: "\f122";
 }
-.icon-undo:before {
+.icon-redo:before {
     content: "\f123";
 }
-.icon-circle:before {
+.icon-undo:before {
     content: "\f124";
 }
-.icon-colorSampler:before {
+.icon-circle:before {
     content: "\f125";
 }
-.icon-line:before {
+.icon-colorSampler:before {
     content: "\f126";
 }
-.icon-pan:before {
+.icon-line:before {
     content: "\f127";
 }
-.icon-select:before {
+.icon-pan:before {
     content: "\f128";
 }
-.icon-shape:before {
+.icon-select:before {
     content: "\f129";
 }
-.icon-shapeAspect:before {
+.icon-shape:before {
     content: "\f12a";
 }
-.icon-shapeLine:before {
+.icon-shapeAspect:before {
     content: "\f12b";
 }
-.icon-shapeSpray:before {
+.icon-shapeLine:before {
     content: "\f12c";
 }
-.icon-shapeStroke:before {
+.icon-shapeSpray:before {
     content: "\f12d";
+}
+.icon-shapeStroke:before {
+    content: "\f12e";
+}
+.icon-stroke:before {
+    content: "\f12f";
 }
