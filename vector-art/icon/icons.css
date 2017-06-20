@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?b728ea4be7c66aacacb09f1157e32a41?#iefix") format("embedded-opentype"),
-url("./icons.woff?b728ea4be7c66aacacb09f1157e32a41") format("woff"),
-url("./icons.ttf?b728ea4be7c66aacacb09f1157e32a41") format("truetype"),
-url("./icons.svg?b728ea4be7c66aacacb09f1157e32a41#icons") format("svg");
+    src: url("./icons.eot?7c96fba1258a8156fb338dc5307b9aec?#iefix") format("embedded-opentype"),
+url("./icons.woff?7c96fba1258a8156fb338dc5307b9aec") format("woff"),
+url("./icons.ttf?7c96fba1258a8156fb338dc5307b9aec") format("truetype"),
+url("./icons.svg?7c96fba1258a8156fb338dc5307b9aec#icons") format("svg");
 }
 
 i {
@@ -116,45 +116,48 @@ i:before {
 .icon-umbrella:before {
     content: "\f121";
 }
-.icon-cog:before {
+.icon-x:before {
     content: "\f122";
 }
-.icon-redo:before {
+.icon-cog:before {
     content: "\f123";
 }
-.icon-undo:before {
+.icon-redo:before {
     content: "\f124";
 }
-.icon-circle:before {
+.icon-undo:before {
     content: "\f125";
 }
-.icon-colorSampler:before {
+.icon-circle:before {
     content: "\f126";
 }
-.icon-line:before {
+.icon-colorSampler:before {
     content: "\f127";
 }
-.icon-pan:before {
+.icon-line:before {
     content: "\f128";
 }
-.icon-select:before {
+.icon-pan:before {
     content: "\f129";
 }
-.icon-shape:before {
+.icon-select:before {
     content: "\f12a";
 }
-.icon-shapeAspect:before {
+.icon-shape:before {
     content: "\f12b";
 }
-.icon-shapeLine:before {
+.icon-shapeAspect:before {
     content: "\f12c";
 }
-.icon-shapeSpray:before {
+.icon-shapeLine:before {
     content: "\f12d";
 }
-.icon-shapeStroke:before {
+.icon-shapeSpray:before {
     content: "\f12e";
 }
-.icon-stroke:before {
+.icon-shapeStroke:before {
     content: "\f12f";
+}
+.icon-stroke:before {
+    content: "\f130";
 }
