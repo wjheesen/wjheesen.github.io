@@ -12,7 +12,8 @@
 </head>
 <body>
     <div id="toolbar">
-        <input id="color-settings" type="text" style="display: none" />
+        <input id="fill-color" type="text" style="display: none" />
+        <input id="stroke-color" type="text" style="display: none" />
         <div class="btn-group"> 
             <div class="btn-group">
                 <button id="shape-button" type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -166,8 +167,8 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div id="other-settings" class="dropdown-menu dropdown-menu-right" aria-labelledby="settings-button">
-                    <label for="stroke-width">Stroke Width:</label>
-                    <input name="stroke-width" type="number" />
+                    <label for="line-width">Line Width:</label>
+                    <input name="line-width" type="number" />
                     <label for="zoom-speed">Zoom Speed:</label>
                     <input name="zoom-speed" type="number" />
                 </div>
