@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?7c96fba1258a8156fb338dc5307b9aec?#iefix") format("embedded-opentype"),
-url("./icons.woff?7c96fba1258a8156fb338dc5307b9aec") format("woff"),
-url("./icons.ttf?7c96fba1258a8156fb338dc5307b9aec") format("truetype"),
-url("./icons.svg?7c96fba1258a8156fb338dc5307b9aec#icons") format("svg");
+    src: url("./icons.eot?a5694d0c33aaa42db3917c2dd24b8180?#iefix") format("embedded-opentype"),
+url("./icons.woff?a5694d0c33aaa42db3917c2dd24b8180") format("woff"),
+url("./icons.ttf?a5694d0c33aaa42db3917c2dd24b8180") format("truetype"),
+url("./icons.svg?a5694d0c33aaa42db3917c2dd24b8180#icons") format("svg");
 }
 
 i {
@@ -134,13 +134,13 @@ i:before {
 .icon-colorSampler:before {
     content: "\f127";
 }
-.icon-line:before {
+.icon-edit:before {
     content: "\f128";
 }
-.icon-pan:before {
+.icon-line:before {
     content: "\f129";
 }
-.icon-select:before {
+.icon-pan:before {
     content: "\f12a";
 }
 .icon-shape:before {
