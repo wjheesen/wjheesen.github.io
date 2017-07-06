@@ -54,10 +54,10 @@
 
         @font-face {
     font-family: "icons";
-    src: url("./icons.eot?07fb4984ab9102efb3025c652d272480?#iefix") format("embedded-opentype"),
-url("./icons.woff?07fb4984ab9102efb3025c652d272480") format("woff"),
-url("./icons.ttf?07fb4984ab9102efb3025c652d272480") format("truetype"),
-url("./icons.svg?07fb4984ab9102efb3025c652d272480#icons") format("svg");
+    src: url("./icons.eot?cd0dcb97dcb64f9141df27082a6d9807?#iefix") format("embedded-opentype"),
+url("./icons.woff?cd0dcb97dcb64f9141df27082a6d9807") format("woff"),
+url("./icons.ttf?cd0dcb97dcb64f9141df27082a6d9807") format("truetype"),
+url("./icons.svg?cd0dcb97dcb64f9141df27082a6d9807#icons") format("svg");
 }
 
 i {
@@ -176,44 +176,59 @@ i:before {
 .icon-cog:before {
     content: "\f123";
 }
-.icon-redo:before {
+.icon-moveBackward:before {
     content: "\f124";
 }
-.icon-undo:before {
+.icon-moveForward:before {
     content: "\f125";
 }
-.icon-circle:before {
+.icon-moveToBack:before {
     content: "\f126";
 }
-.icon-colorSampler:before {
+.icon-moveToFront:before {
     content: "\f127";
 }
-.icon-edit:before {
+.icon-redo:before {
     content: "\f128";
 }
-.icon-line:before {
+.icon-remove:before {
     content: "\f129";
 }
-.icon-pan:before {
+.icon-undo:before {
     content: "\f12a";
 }
-.icon-shape:before {
+.icon-circle:before {
     content: "\f12b";
 }
-.icon-shapeAspect:before {
+.icon-colorSampler:before {
     content: "\f12c";
 }
-.icon-shapeLine:before {
+.icon-edit:before {
     content: "\f12d";
 }
-.icon-shapeSpray:before {
+.icon-line:before {
     content: "\f12e";
 }
-.icon-shapeStroke:before {
+.icon-pan:before {
     content: "\f12f";
 }
-.icon-stroke:before {
+.icon-shape:before {
     content: "\f130";
+}
+.icon-shapeAspect:before {
+    content: "\f131";
+}
+.icon-shapeLine:before {
+    content: "\f132";
+}
+.icon-shapeSpray:before {
+    content: "\f133";
+}
+.icon-shapeStroke:before {
+    content: "\f134";
+}
+.icon-stroke:before {
+    content: "\f135";
 }
 
 
@@ -541,10 +556,55 @@ i:before {
 
         <div class="preview">
             <span class="inner">
+                <i class="icon-moveBackward"></i>
+            </span>
+            <br>
+            <span class='label'>moveBackward</span>
+        </div>
+
+
+        <div class="preview">
+            <span class="inner">
+                <i class="icon-moveForward"></i>
+            </span>
+            <br>
+            <span class='label'>moveForward</span>
+        </div>
+
+
+        <div class="preview">
+            <span class="inner">
+                <i class="icon-moveToBack"></i>
+            </span>
+            <br>
+            <span class='label'>moveToBack</span>
+        </div>
+
+
+        <div class="preview">
+            <span class="inner">
+                <i class="icon-moveToFront"></i>
+            </span>
+            <br>
+            <span class='label'>moveToFront</span>
+        </div>
+
+
+        <div class="preview">
+            <span class="inner">
                 <i class="icon-redo"></i>
             </span>
             <br>
             <span class='label'>redo</span>
+        </div>
+
+
+        <div class="preview">
+            <span class="inner">
+                <i class="icon-remove"></i>
+            </span>
+            <br>
+            <span class='label'>remove</span>
         </div>
 
 
