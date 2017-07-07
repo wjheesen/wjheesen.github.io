@@ -1,9 +1,9 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?e2ffb797f6301bafd8ff4295e54dc4ee?#iefix") format("embedded-opentype"),
-url("./icons.woff?e2ffb797f6301bafd8ff4295e54dc4ee") format("woff"),
-url("./icons.ttf?e2ffb797f6301bafd8ff4295e54dc4ee") format("truetype"),
-url("./icons.svg?e2ffb797f6301bafd8ff4295e54dc4ee#icons") format("svg");
+    src: url("./icons.eot?4180ea8056ba6970d43ec59762b4873b?#iefix") format("embedded-opentype"),
+url("./icons.woff?4180ea8056ba6970d43ec59762b4873b") format("woff"),
+url("./icons.ttf?4180ea8056ba6970d43ec59762b4873b") format("truetype"),
+url("./icons.svg?4180ea8056ba6970d43ec59762b4873b#icons") format("svg");
 }
 
 i {
@@ -122,57 +122,63 @@ i:before {
 .icon-cog:before {
     content: "\f123";
 }
-.icon-moveBackward:before {
+.icon-copy:before {
     content: "\f124";
 }
-.icon-moveForward:before {
+.icon-moveBackward:before {
     content: "\f125";
 }
-.icon-moveToBack:before {
+.icon-moveForward:before {
     content: "\f126";
 }
-.icon-moveToFront:before {
+.icon-moveToBack:before {
     content: "\f127";
 }
-.icon-redo:before {
+.icon-moveToFront:before {
     content: "\f128";
 }
-.icon-remove:before {
+.icon-paste:before {
     content: "\f129";
 }
-.icon-undo:before {
+.icon-redo:before {
     content: "\f12a";
 }
-.icon-circle:before {
+.icon-remove:before {
     content: "\f12b";
 }
-.icon-colorSampler:before {
+.icon-undo:before {
     content: "\f12c";
 }
-.icon-edit:before {
+.icon-circle:before {
     content: "\f12d";
 }
-.icon-line:before {
+.icon-colorSampler:before {
     content: "\f12e";
 }
-.icon-pan:before {
+.icon-edit:before {
     content: "\f12f";
 }
-.icon-shape:before {
+.icon-line:before {
     content: "\f130";
 }
-.icon-shapeAspect:before {
+.icon-pan:before {
     content: "\f131";
 }
-.icon-shapeLine:before {
+.icon-shape:before {
     content: "\f132";
 }
-.icon-shapeSpray:before {
+.icon-shapeAspect:before {
     content: "\f133";
 }
-.icon-shapeStroke:before {
+.icon-shapeLine:before {
     content: "\f134";
 }
-.icon-stroke:before {
+.icon-shapeSpray:before {
     content: "\f135";
+}
+.icon-shapeStroke:before {
+    content: "\f136";
+}
+.icon-stroke:before {
+    content: "\f137";
 }

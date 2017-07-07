@@ -54,10 +54,10 @@
 
         @font-face {
     font-family: "icons";
-    src: url("./icons.eot?cd0dcb97dcb64f9141df27082a6d9807?#iefix") format("embedded-opentype"),
-url("./icons.woff?cd0dcb97dcb64f9141df27082a6d9807") format("woff"),
-url("./icons.ttf?cd0dcb97dcb64f9141df27082a6d9807") format("truetype"),
-url("./icons.svg?cd0dcb97dcb64f9141df27082a6d9807#icons") format("svg");
+    src: url("./icons.eot?c4daa8951c3ff7c7f90e0245dd8de219?#iefix") format("embedded-opentype"),
+url("./icons.woff?c4daa8951c3ff7c7f90e0245dd8de219") format("woff"),
+url("./icons.ttf?c4daa8951c3ff7c7f90e0245dd8de219") format("truetype"),
+url("./icons.svg?c4daa8951c3ff7c7f90e0245dd8de219#icons") format("svg");
 }
 
 i {
@@ -176,59 +176,65 @@ i:before {
 .icon-cog:before {
     content: "\f123";
 }
-.icon-moveBackward:before {
+.icon-copy:before {
     content: "\f124";
 }
-.icon-moveForward:before {
+.icon-moveBackward:before {
     content: "\f125";
 }
-.icon-moveToBack:before {
+.icon-moveForward:before {
     content: "\f126";
 }
-.icon-moveToFront:before {
+.icon-moveToBack:before {
     content: "\f127";
 }
-.icon-redo:before {
+.icon-moveToFront:before {
     content: "\f128";
 }
-.icon-remove:before {
+.icon-paste:before {
     content: "\f129";
 }
-.icon-undo:before {
+.icon-redo:before {
     content: "\f12a";
 }
-.icon-circle:before {
+.icon-remove:before {
     content: "\f12b";
 }
-.icon-colorSampler:before {
+.icon-undo:before {
     content: "\f12c";
 }
-.icon-edit:before {
+.icon-circle:before {
     content: "\f12d";
 }
-.icon-line:before {
+.icon-colorSampler:before {
     content: "\f12e";
 }
-.icon-pan:before {
+.icon-edit:before {
     content: "\f12f";
 }
-.icon-shape:before {
+.icon-line:before {
     content: "\f130";
 }
-.icon-shapeAspect:before {
+.icon-pan:before {
     content: "\f131";
 }
-.icon-shapeLine:before {
+.icon-shape:before {
     content: "\f132";
 }
-.icon-shapeSpray:before {
+.icon-shapeAspect:before {
     content: "\f133";
 }
-.icon-shapeStroke:before {
+.icon-shapeLine:before {
     content: "\f134";
 }
-.icon-stroke:before {
+.icon-shapeSpray:before {
     content: "\f135";
+}
+.icon-shapeStroke:before {
+    content: "\f136";
+}
+.icon-stroke:before {
+    content: "\f137";
 }
 
 
@@ -556,6 +562,15 @@ i:before {
 
         <div class="preview">
             <span class="inner">
+                <i class="icon-copy"></i>
+            </span>
+            <br>
+            <span class='label'>copy</span>
+        </div>
+
+
+        <div class="preview">
+            <span class="inner">
                 <i class="icon-moveBackward"></i>
             </span>
             <br>
@@ -587,6 +602,15 @@ i:before {
             </span>
             <br>
             <span class='label'>moveToFront</span>
+        </div>
+
+
+        <div class="preview">
+            <span class="inner">
+                <i class="icon-paste"></i>
+            </span>
+            <br>
+            <span class='label'>paste</span>
         </div>
 
 
